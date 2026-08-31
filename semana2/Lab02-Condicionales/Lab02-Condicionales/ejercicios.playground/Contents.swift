@@ -209,3 +209,71 @@ for _ in 1...3 {
     texto += "Hola "
 }
 print(texto) // PREDICT 7: "Hola Hola Hola "
+
+
+
+
+// ===== EJERCICIO 4: WHILE =====
+
+// --- Ejemplo (ya resuelto): ---
+var contador = 5
+while contador > 0 {
+    print("Cuenta regresiva: \(contador)")
+    contador -= 1
+}
+print("¡Despegue!")
+
+// --- TODO 11: Ahorro mensual ---
+var ahorro = 0.0
+var meses = 0
+let meta = 2000.0
+let ahorroMensual = 150.0
+while ahorro < meta {
+    ahorro += ahorroMensual
+    meses += 1
+}
+print("Necesita \(meses) meses para juntar S/. \(meta)")
+
+// --- TODO 12: División sucesiva ---
+var numeroDivision = 1000.0
+var divisiones = 0
+while numeroDivision >= 1 {
+    numeroDivision = numeroDivision / 2
+    divisiones += 1
+    print("División \(divisiones): \(numeroDivision)")
+}
+print("Se dividió \(divisiones) veces")
+
+// --- TODO 13: Validar datos con repeat-while ---
+let intento1 = 25
+let intento2 = -3
+let intento3 = 15
+
+var intentoActual = intento1
+var esValido = false
+var numIntento = 1
+repeat {
+    if intentoActual >= 0 && intentoActual <= 20 {
+        esValido = true
+        print("Nota \(intentoActual) válida en intento \(numIntento)")
+    } else {
+        print("Nota \(intentoActual) inválida, intento \(numIntento)")
+        if numIntento == 1 { intentoActual = intento2 }
+        if numIntento == 2 { intentoActual = intento3 }
+        numIntento += 1
+    }
+} while !esValido
+
+// 4.3 — Predicciones
+
+var a = 100
+while a > 1 {
+    a = a / 3
+}
+print(a) // PREDICT 8: Valor final = 1, Vueltas = 5
+
+var b = 0
+repeat {
+    b += 1
+} while b < 0
+print(b) // PREDICT 9: Valor = 1
