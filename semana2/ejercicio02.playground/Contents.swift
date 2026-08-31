@@ -1,6 +1,7 @@
 import Foundation
 
-// Definición de Usuarios
+// - Definición de Usuarios
+
 enum TipoUsuario: String {
     case alumno = "Alumno"
     case docente = "Docente"
@@ -8,25 +9,34 @@ enum TipoUsuario: String {
     
     var diasPermitidos: Int {
         switch self {
-        case .alumno: return 7
-        case .docente: return 15
-        case .administrador: return 10
+        case .alumno:
+            return 7
+        case .docente:
+            return 15
+        case .administrador:
+            return 10
         }
     }
     
     var multaBase: Double {
         switch self {
-        case .alumno: return 1.50
-        case .docente: return 2.00
-        case .administrador: return 3.00
+        case .alumno:
+            return 1.50
+        case .docente:
+            return 2.00
+        case .administrador:
+            return 3.00
         }
     }
 }
 
-// Ingreso de Datos
+// - Ingreso de Datos
 
-print("=== SISTEMA DE PRÉSTAMO DE BIBLIOTECA ===")
+print("==========================================")
+print("     SISTEMA DE PRÉSTAMO DE BIBLIOTECA")
+print("==========================================")
 
+print("")
 print("Ingrese el título del libro:")
 let tituloLibro = readLine() ?? "Sin título"
 
@@ -49,17 +59,18 @@ case 2:
 case 3:
     usuario = .administrador
 default:
-    usuario = .alumno
     print("Opción no válida. Se asignará Alumno.")
+    usuario = .alumno
 }
 
 print("")
 print("Ingrese los días reales del préstamo:")
 let diasPrestadosReales = Int(readLine() ?? "0") ?? 0
 
-// Manejo de Fechas
+//  - Manejo de Fechas
 
 let calendar = Calendar.current
+
 let fechaPrestamo = Date()
 
 guard let fechaLimite = calendar.date(
@@ -78,19 +89,19 @@ guard let fechaDevolucion = calendar.date(
     fatalError("Error calculando fecha de devolución")
 }
 
-// Formateador de Fechas
+// - Formateador de Fechas
 
 let formatter = DateFormatter()
 formatter.dateFormat = "dd/MM/yyyy"
 
-// Cálculo de Días de Atraso
+// MARK: - Cálculo de Días de Atraso
 
 let diasAtraso = max(
     0,
     diasPrestadosReales - usuario.diasPermitidos
 )
 
-//  Cálculo de Multas
+//  - Cálculo de Multas
 
 var multaTotal = 0.0
 
@@ -99,13 +110,19 @@ guard let fechaInicioAtraso = calendar.date(
     value: usuario.diasPermitidos,
     to: fechaPrestamo
 ) else {
-    fatalError("Error calculando inicio del atraso")
+    fatalError("Error calculando fecha de inicio del atraso")
 }
 
 print("")
-print("=== CÁLCULO DE MULTAS ===")
+print("==========================================")
+print("           CÁLCULO DE MULTAS")
+print("==========================================")
 
 if diasAtraso > 0 {
+    
+    print("")
+    print("Día | Fecha       | Multa    | Acumulado")
+    print("------------------------------------------")
     
     for dia in 1...diasAtraso {
         
@@ -120,11 +137,11 @@ if diasAtraso > 0 {
         var multaDia = 0.0
         
         if dia <= 3 {
-            // Del día 1 al 3: multa normal
+            // Días 1 al 3: multa normal
             multaDia = usuario.multaBase
             
         } else if dia <= 6 {
-            // Del día 4 al 6: 50% adicional
+            // Días 4 al 6: 50% adicional
             multaDia = usuario.multaBase * 1.50
             
         } else {
@@ -135,27 +152,46 @@ if diasAtraso > 0 {
         multaTotal += multaDia
         
         print(
-            "Día \(dia) | Fecha: \(formatter.string(from: fechaAtraso)) | " +
-            "Multa: S/ \(String(format: "%.2f", multaDia)) | " +
-            "Acumulado: S/ \(String(format: "%.2f", multaTotal))"
+            "\(dia)   | \(formatter.string(from: fechaAtraso)) | " +
+            "S/ \(String(format: "%.2f", multaDia)) | " +
+            "S/ \(String(format: "%.2f", multaTotal))"
         )
     }
     
 } else {
+    print("")
     print("No hay días de atraso.")
 }
 
-//  Resultado
+// - Situación del Usuario
+
+let situacion: String
+
+if diasAtraso >= 10 {
+    situacion = "SUSPENDIDO"
+} else {
+    situacion = "HABILITADO"
+}
+
+//  - Resultado Final
 
 print("")
-print("=== RESULTADO DEL PRÉSTAMO ===")
-print("Título del Libro  : \(tituloLibro)")
-print("Tipo de Usuario   : \(usuario.rawValue)")
-print("Días Permitidos   : \(usuario.diasPermitidos)")
-print("Fecha de Préstamo : \(formatter.string(from: fechaPrestamo))")
-print("Fecha Límite      : \(formatter.string(from: fechaLimite))")
-print("Fecha Devolución  : \(formatter.string(from: fechaDevolucion))")
-print("Días de Atraso    : \(diasAtraso)")
-print("Multa Total       : S/ \(String(format: "%.2f", multaTotal))")
+print("==========================================")
+print("          RESULTADO DEL PRÉSTAMO")
+print("==========================================")
+
+print("Libro              : \(tituloLibro)")
+print("Usuario             : \(usuario.rawValue)")
+print("Días permitidos     : \(usuario.diasPermitidos)")
+print("Tarifa base         : S/ \(String(format: "%.2f", usuario.multaBase))")
+print("Fecha de préstamo   : \(formatter.string(from: fechaPrestamo))")
+print("Fecha límite        : \(formatter.string(from: fechaLimite))")
+print("Fecha de devolución : \(formatter.string(from: fechaDevolucion))")
+print("Días de atraso      : \(diasAtraso)")
+print("Multa total         : S/ \(String(format: "%.2f", multaTotal))")
+print("Situación            : \(situacion)")
+
+print("==========================================")
+
 
 
