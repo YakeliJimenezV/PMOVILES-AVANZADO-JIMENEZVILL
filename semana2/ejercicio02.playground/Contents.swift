@@ -6,6 +6,7 @@ enum TipoUsuario: String {
     case alumno = "Alumno"
     case docente = "Docente"
     case administrador = "Administrador"
+    case coordinador = "Coordinador"
     
     var diasPermitidos: Int {
         switch self {
@@ -15,6 +16,8 @@ enum TipoUsuario: String {
             return 15
         case .administrador:
             return 10
+        case .coordinador:
+            return 15
         }
     }
     
@@ -26,6 +29,8 @@ enum TipoUsuario: String {
             return 2.00
         case .administrador:
             return 3.00
+        case .coordinador:
+            return 4.00
         }
     }
 }
@@ -40,34 +45,65 @@ print("")
 print("Ingrese el título del libro:")
 let tituloLibro = readLine() ?? "Sin título"
 
+// - Selección del tipo de usuario
+
 print("")
 print("Seleccione el tipo de usuario:")
 print("1. Alumno")
 print("2. Docente")
 print("3. Administrador")
-print("Ingrese una opción:")
+print("4. Coordinador")
 
-let opcionUsuario = Int(readLine() ?? "1") ?? 1
+var usuario: TipoUsuario
 
-let usuario: TipoUsuario
-
-switch opcionUsuario {
-case 1:
-    usuario = .alumno
-case 2:
-    usuario = .docente
-case 3:
-    usuario = .administrador
-default:
-    print("Opción no válida. Se asignará Alumno.")
-    usuario = .alumno
+while true {
+    
+    print("Ingrese una opción:")
+    
+    if let entrada = readLine(), let opcionUsuario = Int(entrada) {
+        
+        switch opcionUsuario {
+            
+        case 1:
+            usuario = .alumno
+            break
+            
+        case 2:
+            usuario = .docente
+            break
+            
+        case 3:
+            usuario = .administrador
+            break
+            
+        case 4:
+            usuario = .coordinador
+            break
+            
+        default:
+            print("")
+            print("Opción incorrecta. Vuelva a elegir una opción.")
+            print("")
+            continue
+        }
+        
+        break
+        
+    } else {
+        print("")
+        print("Opción incorrecta. Vuelva a elegir una opción.")
+        print("")
+    }
 }
+
+// - Días reales del préstamo
 
 print("")
 print("Ingrese los días reales del préstamo:")
+
 let diasPrestadosReales = Int(readLine() ?? "0") ?? 0
 
-//  - Manejo de Fechas
+// - Manejo de Fechas
 
 let calendar = Calendar.current
 
@@ -94,14 +130,14 @@ guard let fechaDevolucion = calendar.date(
 let formatter = DateFormatter()
 formatter.dateFormat = "dd/MM/yyyy"
 
-// MARK: - Cálculo de Días de Atraso
+// - Cálculo de Días de Atraso
 
 let diasAtraso = max(
     0,
     diasPrestadosReales - usuario.diasPermitidos
 )
 
-//  - Cálculo de Multas
+// - Cálculo de Multas
 
 var multaTotal = 0.0
 
@@ -136,17 +172,43 @@ if diasAtraso > 0 {
         
         var multaDia = 0.0
         
-        if dia <= 3 {
-            // Días 1 al 3: multa normal
-            multaDia = usuario.multaBase
+        // - Reglas especiales para Coordinador
+        
+        if usuario == .coordinador {
             
-        } else if dia <= 6 {
-            // Días 4 al 6: 50% adicional
-            multaDia = usuario.multaBase * 1.50
+            if dia <= 3 {
+                // Días 1 al 3: multa normal
+                multaDia = usuario.multaBase
+                
+            } else if dia <= 6 {
+                // Días 4 al 6: 20% adicional
+                multaDia = usuario.multaBase * 1.20
+                
+            } else if dia <= 10 {
+                // Días 7 al 10: 50% adicional
+                multaDia = usuario.multaBase * 1.50
+                
+            } else {
+                // Días 11 al 20: 100% adicional
+                multaDia = usuario.multaBase * 2.00
+            }
             
         } else {
-            // Desde el día 7: 100% adicional
-            multaDia = usuario.multaBase * 2.00
+            
+            // - Reglas para Alumno, Docente y Administrador
+            
+            if dia <= 3 {
+                // Días 1 al 3: multa normal
+                multaDia = usuario.multaBase
+                
+            } else if dia <= 6 {
+                // Días 4 al 6: 50% adicional
+                multaDia = usuario.multaBase * 1.50
+                
+            } else {
+                // Desde el día 7: 100% adicional
+                multaDia = usuario.multaBase * 2.00
+            }
         }
         
         multaTotal += multaDia
@@ -159,6 +221,7 @@ if diasAtraso > 0 {
     }
     
 } else {
+    
     print("")
     print("No hay días de atraso.")
 }
@@ -167,13 +230,27 @@ if diasAtraso > 0 {
 
 let situacion: String
 
-if diasAtraso >= 10 {
-    situacion = "SUSPENDIDO"
+if usuario == .coordinador {
+    
+    // Coordinador: máximo 20 días de atraso
+    if diasAtraso > 20 {
+        situacion = "SUSPENDIDO"
+    } else {
+        situacion = "HABILITADO"
+    }
+    
 } else {
-    situacion = "HABILITADO"
+    
+    // Alumno, Docente y Administrador:
+    // suspensión desde 10 días de atraso
+    if diasAtraso >= 10 {
+        situacion = "SUSPENDIDO"
+    } else {
+        situacion = "HABILITADO"
+    }
 }
 
-//  - Resultado Final
+// - Resultado Final
 
 print("")
 print("==========================================")
@@ -181,17 +258,14 @@ print("          RESULTADO DEL PRÉSTAMO")
 print("==========================================")
 
 print("Libro              : \(tituloLibro)")
-print("Usuario             : \(usuario.rawValue)")
-print("Días permitidos     : \(usuario.diasPermitidos)")
-print("Tarifa base         : S/ \(String(format: "%.2f", usuario.multaBase))")
-print("Fecha de préstamo   : \(formatter.string(from: fechaPrestamo))")
-print("Fecha límite        : \(formatter.string(from: fechaLimite))")
-print("Fecha de devolución : \(formatter.string(from: fechaDevolucion))")
-print("Días de atraso      : \(diasAtraso)")
-print("Multa total         : S/ \(String(format: "%.2f", multaTotal))")
-print("Situación            : \(situacion)")
+print("Usuario            : \(usuario.rawValue)")
+print("Días permitidos    : \(usuario.diasPermitidos)")
+print("Tarifa base        : S/ \(String(format: "%.2f", usuario.multaBase))")
+print("Fecha de préstamo  : \(formatter.string(from: fechaPrestamo))")
+print("Fecha límite       : \(formatter.string(from: fechaLimite))")
+print("Fecha de devolución: \(formatter.string(from: fechaDevolucion))")
+print("Días de atraso     : \(diasAtraso)")
+print("Multa total        : S/ \(String(format: "%.2f", multaTotal))")
+print("Situación          : \(situacion)")
 
 print("==========================================")
-
-
-
