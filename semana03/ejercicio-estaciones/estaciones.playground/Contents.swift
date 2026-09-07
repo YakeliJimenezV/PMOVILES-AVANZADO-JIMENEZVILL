@@ -1,4 +1,3 @@
-
 import Foundation
 
 // MARK: - Modelo de Estación
@@ -441,7 +440,18 @@ let linea3 = Linea(
     estaciones: []
 )
 
-// MARK: - Mostrar información
+// MARK: - Línea 4
+
+let linea4 = Linea(
+    numero: 4,
+    nombre: "Línea 4",
+    origen: "Callao",
+    destino: "Santa Anita",
+    estado: "Planificada",
+    estaciones: []
+)
+
+// MARK: - Mostrar información de las líneas
 
 print("======================================")
 print("          🚇 METRO DE LIMA")
@@ -451,13 +461,13 @@ print("\n🚇 \(linea1.nombre)")
 print("Origen: \(linea1.origen)")
 print("Destino: \(linea1.destino)")
 print("Estado: \(linea1.estado)")
-print("Estaciones: \(linea1.estaciones.count)")
+print("Estaciones registradas: \(linea1.estaciones.count)")
 
 print("\n🚇 \(linea2.nombre)")
 print("Origen: \(linea2.origen)")
 print("Destino: \(linea2.destino)")
 print("Estado: \(linea2.estado)")
-print("Estaciones: \(linea2.estaciones.count)")
+print("Estaciones registradas: \(linea2.estaciones.count)")
 
 print("\n🚇 \(linea3.nombre)")
 print("Origen: \(linea3.origen)")
@@ -465,6 +475,12 @@ print("Destino: \(linea3.destino)")
 print("Estado: \(linea3.estado)")
 print("Estaciones registradas: \(linea3.estaciones.count)")
 
+print("\n🚇 \(linea4.nombre)")
+print("Origen: \(linea4.origen)")
+print("Destino: \(linea4.destino)")
+print("Estado: \(linea4.estado)")
+print("Estaciones registradas: \(linea4.estaciones.count)")
+
 print("\n======================================")
-print("        FIN DE LA CONSULTA")
+print("           FIN DEL PROGRAMA")
 print("======================================")
