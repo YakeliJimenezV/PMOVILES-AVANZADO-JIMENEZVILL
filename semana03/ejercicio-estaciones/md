@@ -1,1 +1,17 @@
 
+struct Estacion {
+    let nombre: String
+    let distrito: String
+    let avenida: String
+    let lugaresCercanos: [String]
+}
+
+let atocongo = Estacion(
+    nombre: "Atocongo",
+    distrito: "San Juan de Miraflores",
+    avenida: "Av. Pedro Miotta",
+    lugaresCercanos: [
+        "Mall del Sur",
+        "TECSUP"
+    ]
+)
