@@ -54,15 +54,15 @@ let linea1 = Linea(
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "San Juan",
-            distrito: "San Juan de Miraflores",
-            avenida: "Av. Los Héroes",
-            lugaresCercanos: []
-        ),
-        Estacion(
             nombre: "María Auxiliadora",
             distrito: "San Juan de Miraflores",
             avenida: "Av. Miguel Iglesias",
+            lugaresCercanos: []
+        ),
+        Estacion(
+            nombre: "San Juan",
+            distrito: "San Juan de Miraflores",
+            avenida: "Av. Los Héroes",
             lugaresCercanos: []
         ),
         Estacion(
@@ -75,9 +75,9 @@ let linea1 = Linea(
             ]
         ),
         Estacion(
-            nombre: "Ayacucho",
+            nombre: "Jorge Chávez",
             distrito: "Santiago de Surco",
-            avenida: "Av. Ayacucho",
+            avenida: "Av. Tomás Marsano",
             lugaresCercanos: []
         ),
         Estacion(
@@ -87,19 +87,19 @@ let linea1 = Linea(
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "Jorge Chávez",
+            nombre: "Ayacucho",
             distrito: "Santiago de Surco",
-            avenida: "Av. Tomás Marsano",
+            avenida: "Av. Ayacucho",
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "San Borja Sur",
+            nombre: "Angamos",
             distrito: "San Borja",
             avenida: "Av. Aviación",
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "Angamos",
+            nombre: "San Borja Sur",
             distrito: "San Borja",
             avenida: "Av. Aviación",
             lugaresCercanos: []
@@ -205,125 +205,6 @@ let linea2 = Linea(
     estado: "Operativa parcialmente",
     estaciones: [
         Estacion(
-            nombre: "Puerto del Callao",
-            distrito: "Callao",
-            avenida: "Av. Guardia Chalaca",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Buenos Aires",
-            distrito: "Callao",
-            avenida: "Av. Guardia Chalaca",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Juan Pablo II",
-            distrito: "Callao",
-            avenida: "Av. Juan Pablo II",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Insurgentes",
-            distrito: "Bellavista",
-            avenida: "Av. Insurgentes",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Carmen de la Legua",
-            distrito: "Carmen de la Legua-Reynoso",
-            avenida: "Av. Colonial",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Óscar Benavides",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Colonial",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "San Marcos",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Colonial",
-            lugaresCercanos: [
-                "Universidad Nacional Mayor de San Marcos"
-            ]
-        ),
-        Estacion(
-            nombre: "Elio",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Venezuela",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "La Alborada",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Venezuela",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Tingo María",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Tingo María",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Parque Murillo",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Arica",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Plaza Bolognesi",
-            distrito: "Cercado de Lima",
-            avenida: "Plaza Bolognesi",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Estación Central",
-            distrito: "Cercado de Lima",
-            avenida: "Av. Paseo de la República",
-            lugaresCercanos: [
-                "Centro Cívico",
-                "Metropolitano"
-            ]
-        ),
-        Estacion(
-            nombre: "Plaza Manco Cápac",
-            distrito: "La Victoria",
-            avenida: "Av. Manco Cápac",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Cangallo",
-            distrito: "La Victoria",
-            avenida: "Av. 28 de Julio",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "28 de Julio",
-            distrito: "La Victoria",
-            avenida: "Av. 28 de Julio",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Nicolás Ayllón",
-            distrito: "La Victoria",
-            avenida: "Av. Nicolás Ayllón",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Circunvalación",
-            distrito: "San Luis",
-            avenida: "Av. Circunvalación",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "San Juan de Dios",
-            distrito: "San Luis",
-            avenida: "Av. Nicolás Ayllón",
-            lugaresCercanos: []
-        ),
-        Estacion(
             nombre: "Evitamiento",
             distrito: "Ate",
             avenida: "Av. Nicolás Ayllón",
@@ -357,18 +238,6 @@ let linea2 = Linea(
         ),
         Estacion(
             nombre: "Vista Alegre",
-            distrito: "Ate",
-            avenida: "Av. Nicolás Ayllón",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Prolongación Javier Prado",
-            distrito: "Ate",
-            avenida: "Av. Prolongación Javier Prado",
-            lugaresCercanos: []
-        ),
-        Estacion(
-            nombre: "Municipalidad de Ate",
             distrito: "Ate",
             avenida: "Av. Nicolás Ayllón",
             lugaresCercanos: []
@@ -414,7 +283,7 @@ let linea6 = Linea(
     estaciones: []
 )
 
-// MARK: - Colección general de líneas
+// MARK: - Colección general
 
 let lineas = [
     linea1,
@@ -425,7 +294,7 @@ let lineas = [
     linea6
 ]
 
-// MARK: - Funciones
+// MARK: - Mostrar líneas
 
 func mostrarLineas() {
 
@@ -445,6 +314,8 @@ func mostrarLineas() {
     print("\n========================================")
 }
 
+// MARK: - Consultar información de una línea
+
 func consultarLinea() {
 
     print("\n========================================")
@@ -456,13 +327,13 @@ func consultarLinea() {
     guard let entrada = readLine(),
           let numero = Int(entrada) else {
 
-        print("\n Debe ingresar un número válido.")
+        print("\n❌ Debe ingresar un número válido.")
         return
     }
 
     guard let linea = lineas.first(where: { $0.numero == numero }) else {
 
-        print("\n No existe una línea con ese número.")
+        print("\n❌ No existe una línea con ese número.")
         return
     }
 
@@ -470,11 +341,22 @@ func consultarLinea() {
     print("Origen: \(linea.origen)")
     print("Destino: \(linea.destino)")
     print("Estado: \(linea.estado)")
-    print("Estaciones registradas: \(linea.estaciones.count)")
 
     if linea.estaciones.isEmpty {
-        print("\n Esta línea todavía no tiene estaciones registradas en la aplicación.")
+
+        print("\nℹ️ Esta línea todavía no tiene estaciones registradas en la aplicación.")
+
+    } else {
+
+        print("\n📍 ESTACIONES:")
+
+        for (indice, estacion) in linea.estaciones.enumerated() {
+
+            print("\(indice + 1). \(estacion.nombre)")
+        }
     }
+
+    print("\n========================================")
 }
 
 // MARK: - Menú principal
@@ -486,11 +368,11 @@ while continuar {
     print("""
     
     ========================================
-               METRO DE LIMA
+              🚇 METRO DE LIMA
     ========================================
     
     1. Listar líneas
-    2. Consultar una línea
+    2. Consultar estaciones de una línea
     3. Salir
     
     Seleccione una opción:
@@ -501,12 +383,15 @@ while continuar {
     switch opcion {
 
     case "1":
+
         mostrarLineas()
 
     case "2":
+
         consultarLinea()
 
     case "3":
+
         continuar = false
 
         print("""
@@ -517,6 +402,7 @@ while continuar {
         """)
 
     default:
+
         print("\n Opción no válida. Seleccione 1, 2 o 3.")
     }
 }
