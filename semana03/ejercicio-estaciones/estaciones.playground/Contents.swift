@@ -1,3 +1,4 @@
+
 import Foundation
 
 // MARK: - Modelo de Estación
@@ -20,7 +21,7 @@ struct Linea {
     let estaciones: [Estacion]
 }
 
-// MARK: - Línea 1 del Metro de Lima
+// MARK: - Línea 1
 
 let linea1 = Linea(
     numero: 1,
@@ -221,7 +222,7 @@ let linea1 = Linea(
     ]
 )
 
-// MARK: - Línea 2 del Metro de Lima
+// MARK: - Línea 2
 
 let linea2 = Linea(
     numero: 2,
@@ -429,45 +430,41 @@ let linea2 = Linea(
     ]
 )
 
-// MARK: - Mostrar Línea 1
+// MARK: - Línea 3
+
+let linea3 = Linea(
+    numero: 3,
+    nombre: "Línea 3",
+    origen: "Comas",
+    destino: "San Juan de Miraflores",
+    estado: "Planificada",
+    estaciones: []
+)
+
+// MARK: - Mostrar información
 
 print("======================================")
-print("       🚇 METRO DE LIMA")
+print("          🚇 METRO DE LIMA")
 print("======================================")
 
 print("\n🚇 \(linea1.nombre)")
 print("Origen: \(linea1.origen)")
 print("Destino: \(linea1.destino)")
 print("Estado: \(linea1.estado)")
+print("Estaciones: \(linea1.estaciones.count)")
 
-print("\n🚉 Estaciones de la Línea 1:")
-print("--------------------------------------")
-
-for (indice, estacion) in linea1.estaciones.enumerated() {
-    print("\(indice + 1). \(estacion.nombre)")
-}
-
-print("\nTotal de estaciones Línea 1: \(linea1.estaciones.count)")
-
-// MARK: - Mostrar Línea 2
-
-print("\n======================================")
-print("       🚇 \(linea2.nombre)")
-print("======================================")
-
+print("\n🚇 \(linea2.nombre)")
 print("Origen: \(linea2.origen)")
 print("Destino: \(linea2.destino)")
 print("Estado: \(linea2.estado)")
+print("Estaciones: \(linea2.estaciones.count)")
 
-print("\n🚉 Estaciones de la Línea 2:")
-print("--------------------------------------")
-
-for (indice, estacion) in linea2.estaciones.enumerated() {
-    print("\(indice + 1). \(estacion.nombre)")
-}
-
-print("\nTotal de estaciones Línea 2: \(linea2.estaciones.count)")
+print("\n🚇 \(linea3.nombre)")
+print("Origen: \(linea3.origen)")
+print("Destino: \(linea3.destino)")
+print("Estado: \(linea3.estado)")
+print("Estaciones registradas: \(linea3.estaciones.count)")
 
 print("\n======================================")
-print("       FIN DE LA CONSULTA")
+print("        FIN DE LA CONSULTA")
 print("======================================")
