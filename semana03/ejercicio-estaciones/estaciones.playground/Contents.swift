@@ -54,15 +54,15 @@ let linea1 = Linea(
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "María Auxiliadora",
-            distrito: "San Juan de Miraflores",
-            avenida: "Av. Miguel Iglesias",
-            lugaresCercanos: []
-        ),
-        Estacion(
             nombre: "San Juan",
             distrito: "San Juan de Miraflores",
             avenida: "Av. Los Héroes",
+            lugaresCercanos: []
+        ),
+        Estacion(
+            nombre: "María Auxiliadora",
+            distrito: "San Juan de Miraflores",
+            avenida: "Av. Miguel Iglesias",
             lugaresCercanos: []
         ),
         Estacion(
@@ -75,9 +75,9 @@ let linea1 = Linea(
             ]
         ),
         Estacion(
-            nombre: "Jorge Chávez",
+            nombre: "Ayacucho",
             distrito: "Santiago de Surco",
-            avenida: "Av. Tomás Marsano",
+            avenida: "Av. Ayacucho",
             lugaresCercanos: []
         ),
         Estacion(
@@ -87,19 +87,19 @@ let linea1 = Linea(
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "Ayacucho",
+            nombre: "Jorge Chávez",
             distrito: "Santiago de Surco",
-            avenida: "Av. Ayacucho",
+            avenida: "Av. Tomás Marsano",
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "Angamos",
+            nombre: "San Borja Sur",
             distrito: "San Borja",
             avenida: "Av. Aviación",
             lugaresCercanos: []
         ),
         Estacion(
-            nombre: "San Borja Sur",
+            nombre: "Angamos",
             distrito: "San Borja",
             avenida: "Av. Aviación",
             lugaresCercanos: []
@@ -376,92 +376,147 @@ let linea2 = Linea(
     ]
 )
 
-// MARK: - Línea 3
+// MARK: - Líneas 3, 4, 5 y 6
 
 let linea3 = Linea(
     numero: 3,
     nombre: "Línea 3",
     origen: "Comas",
     destino: "San Juan de Miraflores",
-    estado: "Planificada",
+    estado: "Proyectada",
     estaciones: []
 )
-
-// MARK: - Línea 4
 
 let linea4 = Linea(
     numero: 4,
     nombre: "Línea 4",
     origen: "Callao",
-    destino: "Santa Anita",
-    estado: "En desarrollo",
+    destino: "La Molina",
+    estado: "Proyectada",
     estaciones: []
 )
-
-// MARK: - Línea 5
 
 let linea5 = Linea(
     numero: 5,
     nombre: "Línea 5",
-    origen: "Surquillo",
+    origen: "Chorrillos",
     destino: "Villa El Salvador",
-    estado: "Planificada",
+    estado: "Proyectada",
     estaciones: []
 )
-
-// MARK: - Línea 6
 
 let linea6 = Linea(
     numero: 6,
     nombre: "Línea 6",
-    origen: "San Martín de Porres",
-    destino: "La Molina",
-    estado: "Planificada",
+    origen: "Independencia",
+    destino: "Santiago de Surco",
+    estado: "Proyectada",
     estaciones: []
 )
 
-// MARK: - Mostrar información de las líneas
+// MARK: - Colección general de líneas
 
-print("======================================")
-print("          🚇 METRO DE LIMA")
-print("======================================")
+let lineas = [
+    linea1,
+    linea2,
+    linea3,
+    linea4,
+    linea5,
+    linea6
+]
 
-print("\n🚇 \(linea1.nombre)")
-print("Origen: \(linea1.origen)")
-print("Destino: \(linea1.destino)")
-print("Estado: \(linea1.estado)")
-print("Estaciones registradas: \(linea1.estaciones.count)")
+// MARK: - Funciones
 
-print("\n🚇 \(linea2.nombre)")
-print("Origen: \(linea2.origen)")
-print("Destino: \(linea2.destino)")
-print("Estado: \(linea2.estado)")
-print("Estaciones registradas: \(linea2.estaciones.count)")
+func mostrarLineas() {
 
-print("\n🚇 \(linea3.nombre)")
-print("Origen: \(linea3.origen)")
-print("Destino: \(linea3.destino)")
-print("Estado: \(linea3.estado)")
-print("Estaciones registradas: \(linea3.estaciones.count)")
+    print("\n========================================")
+    print("       🚇 LÍNEAS DEL METRO DE LIMA")
+    print("========================================")
 
-print("\n🚇 \(linea4.nombre)")
-print("Origen: \(linea4.origen)")
-print("Destino: \(linea4.destino)")
-print("Estado: \(linea4.estado)")
-print("Estaciones registradas: \(linea4.estaciones.count)")
+    for linea in lineas {
 
-print("\n🚇 \(linea5.nombre)")
-print("Origen: \(linea5.origen)")
-print("Destino: \(linea5.destino)")
-print("Estado: \(linea5.estado)")
-print("Estaciones registradas: \(linea5.estaciones.count)")
+        print("\n🚇 \(linea.nombre)")
+        print("   Origen: \(linea.origen)")
+        print("   Destino: \(linea.destino)")
+        print("   Estado: \(linea.estado)")
+        print("   Estaciones registradas: \(linea.estaciones.count)")
+    }
 
-print("\n🚇 \(linea6.nombre)")
-print("Origen: \(linea6.origen)")
-print("Destino: \(linea6.destino)")
-print("Estado: \(linea6.estado)")
-print("Estaciones registradas: \(linea6.estaciones.count)")
+    print("\n========================================")
+}
 
-print("\n======================================")
-print("           FIN DEL PROGRAMA")
-print("======================================")
+func consultarLinea() {
+
+    print("\n========================================")
+    print("       🔎 CONSULTAR LÍNEA")
+    print("========================================")
+
+    print("Ingrese el número de línea (1-6): ", terminator: "")
+
+    guard let entrada = readLine(),
+          let numero = Int(entrada) else {
+
+        print("\n Debe ingresar un número válido.")
+        return
+    }
+
+    guard let linea = lineas.first(where: { $0.numero == numero }) else {
+
+        print("\n No existe una línea con ese número.")
+        return
+    }
+
+    print("\n🚇 \(linea.nombre)")
+    print("Origen: \(linea.origen)")
+    print("Destino: \(linea.destino)")
+    print("Estado: \(linea.estado)")
+    print("Estaciones registradas: \(linea.estaciones.count)")
+
+    if linea.estaciones.isEmpty {
+        print("\n Esta línea todavía no tiene estaciones registradas en la aplicación.")
+    }
+}
+
+// MARK: - Menú principal
+
+var continuar = true
+
+while continuar {
+
+    print("""
+    
+    ========================================
+               METRO DE LIMA
+    ========================================
+    
+    1. Listar líneas
+    2. Consultar una línea
+    3. Salir
+    
+    Seleccione una opción:
+    """, terminator: "")
+
+    let opcion = readLine()
+
+    switch opcion {
+
+    case "1":
+        mostrarLineas()
+
+    case "2":
+        consultarLinea()
+
+    case "3":
+        continuar = false
+
+        print("""
+        
+        ========================================
+        🚇 Gracias por usar Metro de Lima
+        ========================================
+        """)
+
+    default:
+        print("\n Opción no válida. Seleccione 1, 2 o 3.")
+    }
+}
