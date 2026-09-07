@@ -138,12 +138,12 @@ func consultarLinea() {
 
     guard let entrada = readLine(),
           let numero = Int(entrada) else {
-        print(" Debe ingresar un número válido.")
+        print("❌ Debe ingresar un número válido.")
         return
     }
 
     guard let linea = lineas.first(where: { $0.numero == numero }) else {
-        print(" La línea \(numero) no existe.")
+        print("❌ La línea \(numero) no existe.")
         return
     }
 
@@ -153,7 +153,7 @@ func consultarLinea() {
     print("Estado: \(linea.estado)")
 
     if linea.estaciones.isEmpty {
-        print("\n Esta línea todavía no tiene estaciones registradas.")
+        print("\n⚠️ Esta línea todavía no tiene estaciones registradas.")
     } else {
         print("\nEstaciones:")
 
@@ -171,7 +171,7 @@ func buscarEstacion() {
 
     guard let entrada = readLine(),
           !entrada.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-        print(" Debe ingresar el nombre de una estación.")
+        print("Debe ingresar el nombre de una estación.")
         return
     }
 
@@ -242,7 +242,7 @@ while continuar {
     print("Seleccione una opción: ", terminator: "")
 
     guard let opcion = readLine() else {
-        print(" No se pudo leer la opción.")
+        print("No se pudo leer la opción.")
         continue
     }
 
