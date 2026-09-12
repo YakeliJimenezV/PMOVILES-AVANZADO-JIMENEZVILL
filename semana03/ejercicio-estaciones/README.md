@@ -1,28 +1,29 @@
-## Requerimientos funcionales
+# Sistema de Consulta y Planificación de Rutas - Metro de Lima
 
-### RF01. Listar las líneas del Metro de Lima
+Aplicación de consola desarrollada en Swift que permite consultar información de las líneas, estaciones y rutas del Metro de Lima, incluyendo transbordos, tarifas y distancias aproximadas.
 
-El sistema debe permitir visualizar las 6 líneas consideradas en el proyecto, mostrando su origen, destino, estado y cantidad de estaciones registradas.
+## Requerimientos Funcionales
 
-### RF02. Consultar estaciones de una línea
+**RF01. Listar las líneas del Metro de Lima**
+El sistema muestra las 6 líneas registradas del proyecto, indicando su origen, destino, estado general, cantidad de estaciones (total, operativas, en construcción y proyectadas) y la tarifa cuando está definida.
 
-El sistema debe permitir ingresar el número de una línea y mostrar las estaciones operativas registradas para dicha línea.
+**RF02. Consultar estaciones por línea**
+El sistema permite ingresar el número de una línea (del 1 al 6) y muestra el listado completo de sus estaciones junto con el estado individual de cada una.
 
-### RF03. Buscar y consultar información de una estación
+**RF03. Buscar estación por nombre**
+El sistema permite buscar una estación escribiendo su nombre, sin importar mayúsculas, minúsculas o tildes, y muestra la línea a la que pertenece, su distrito, avenida, estado, tarifa, estación anterior y estación siguiente.
 
-El sistema debe permitir buscar una estación por su nombre y mostrar información como la línea a la que pertenece, distrito, avenida, estación anterior, estación siguiente y lugares cercanos.
+**RF04. Consultar lugares cercanos y conexiones de una estación**
+El sistema permite consultar los lugares cercanos registrados de una estación específica, así como las conexiones que tiene con otras líneas del metro.
 
-### RF04. Consultar lugares cercanos
+**RF05. Planificar ruta entre dos estaciones**
+El sistema permite ingresar una estación de origen y una de destino, y calcula el recorrido correspondiente, ya sea dentro de la misma línea o mediante un transbordo si pertenecen a líneas distintas.
 
-El sistema debe permitir consultar los lugares cercanos registrados para una estación determinada.
+**RF06. Calcular tarifa y distancia aproximada del recorrido**
+El sistema calcula la distancia aproximada en kilómetros según la cantidad de tramos recorridos y muestra la tarifa o tarifas correspondientes a la línea o líneas utilizadas en la ruta.
 
-### RF05. Planificar rutas y transbordos
-
-El sistema debe permitir ingresar una estación de origen y una estación de destino, identificar las líneas correspondientes y mostrar la ruta. Si las estaciones pertenecen a líneas diferentes, debe verificar la existencia y estado de una conexión e informar si se requiere un transbordo.
-
----
 
 ## Autor
 
-**Yakeli Jiménez**
+Yakeli Jiménez
 
