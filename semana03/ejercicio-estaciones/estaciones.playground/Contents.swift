@@ -1,4 +1,3 @@
-
 import Foundation
 
 // MARK: - ESTADOS
@@ -7,7 +6,7 @@ enum Estado {
     case operativa
     case construccion
     case proyectada
-    
+
     var descripcion: String {
         switch self {
         case .operativa:
@@ -41,13 +40,13 @@ struct Estacion {
 // MARK: - LÍNEA
 
 struct Linea {
-    let numero: Int
-    let nombre: String
-    let origen: String
-    let destino: String
-    let estado: Estado
-    let tarifa: Double?
-    let estaciones: [Estacion]
+    var numero: Int
+    var nombre: String
+    var origen: String
+    var destino: String
+    var estado: Estado
+    var tarifa: Double?
+    var estaciones: [Estacion]
 }
 
 // MARK: - CONEXIÓN
@@ -60,10 +59,10 @@ struct Conexion {
     let estado: Estado
 }
 
-// MARK: - FUNCIONES GENERALES
+// MARK: - DATOS
 
 func normalizar(_ texto: String) -> String {
-    texto
+    return texto
         .folding(
             options: [.diacriticInsensitive, .caseInsensitive],
             locale: Locale(identifier: "es_PE")
@@ -72,11 +71,32 @@ func normalizar(_ texto: String) -> String {
 }
 
 func leerOpcion() -> String {
-    readLine()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    return readLine()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 }
 
 func tarifaTexto(_ tarifa: Double) -> String {
-    String(format: "S/ %.2f", tarifa)
+    return String(format: "S/ %.2f", tarifa)
+}
+
+func leerEstado() -> Estado {
+    print("""
+    
+    Seleccione el estado:
+    1. Operativa
+    2. En construcción
+    3. Proyectada
+    """)
+    
+    print("Opción: ", terminator: "")
+    
+    switch leerOpcion() {
+    case "1":
+        return .operativa
+    case "2":
+        return .construccion
+    default:
+        return .proyectada
+    }
 }
 
 // MARK: - CREAR ESTACIONES
@@ -92,12 +112,26 @@ func crearEstaciones(
     var resultado: [Estacion] = []
     
     for i in 0..<nombres.count {
-        let anterior = i > 0 ? nombres[i - 1] : "Inicio de línea"
-        let siguiente = i < nombres.count - 1 ? nombres[i + 1] : "Fin de línea"
         
-        let distrito = i < distritos.count ? distritos[i] : "Por definir"
-        let avenida = i < avenidas.count ? avenidas[i] : "Por definir"
-        let estado = i < estados.count ? estados[i] : .proyectada
+        let anterior = i > 0
+            ? nombres[i - 1]
+            : "Inicio de línea"
+        
+        let siguiente = i < nombres.count - 1
+            ? nombres[i + 1]
+            : "Fin de línea"
+        
+        let distrito = i < distritos.count
+            ? distritos[i]
+            : "Por definir"
+        
+        let avenida = i < avenidas.count
+            ? avenidas[i]
+            : "Por definir"
+        
+        let estado = i < estados.count
+            ? estados[i]
+            : .proyectada
         
         resultado.append(
             Estacion(
@@ -114,11 +148,44 @@ func crearEstaciones(
     return resultado
 }
 
+func actualizarEstacionesCercanas(
+    estaciones: inout [Estacion]
+) {
+    
+    if estaciones.isEmpty {
+        return
+    }
+    
+    for i in 0..<estaciones.count {
+        
+        let anterior = i > 0
+            ? estaciones[i - 1].nombre
+            : "Inicio de línea"
+        
+        let siguiente = i < estaciones.count - 1
+            ? estaciones[i + 1].nombre
+            : "Fin de línea"
+        
+        let estacion = estaciones[i]
+        
+        estaciones[i] = Estacion(
+            nombre: estacion.nombre,
+            distrito: estacion.distrito,
+            avenida: estacion.avenida,
+            estado: estacion.estado,
+            lugaresCercanos: estacion.lugaresCercanos,
+            estacionesCercanas: [anterior, siguiente]
+        )
+    }
+}
+
 // MARK: - CREAR LÍNEAS
 
 func crearLineas() -> [Linea] {
     
-    let estacionesL1 = [
+    // MARK: Línea 1
+    
+    let nombresL1 = [
         "Bayóvar",
         "Santa Rosa",
         "San Martín",
@@ -156,9 +223,9 @@ func crearLineas() -> [Linea] {
         "San Juan de Lurigancho",
         "San Juan de Lurigancho",
         "San Juan de Lurigancho",
-        "San Juan de Lurigancho",
         "El Agustino",
         "Cercado de Lima",
+        "La Victoria",
         "La Victoria",
         "La Victoria",
         "La Victoria",
@@ -206,22 +273,38 @@ func crearLineas() -> [Linea] {
     ]
     
     let lugaresL1: [String: [String]] = [
-        "Gamarra": ["Emporio Comercial de Gamarra"],
-        "La Cultura": ["Biblioteca Nacional del Perú", "Gran Teatro Nacional"],
-        "Atocongo": ["Mall del Sur"],
-        "Miguel Grau": ["Hospital Nacional Dos de Mayo"],
-        "Villa El Salvador": ["Parque Industrial de Villa El Salvador"]
+        "Gamarra": [
+            "Emporio Comercial de Gamarra"
+        ],
+        "La Cultura": [
+            "Biblioteca Nacional del Perú",
+            "Gran Teatro Nacional"
+        ],
+        "Atocongo": [
+            "Mall del Sur"
+        ],
+        "Miguel Grau": [
+            "Hospital Nacional Dos de Mayo"
+        ],
+        "Villa El Salvador": [
+            "Parque Industrial de Villa El Salvador"
+        ]
     ]
     
-    let l1 = crearEstaciones(
-        nombres: estacionesL1,
+    let estacionesL1 = crearEstaciones(
+        nombres: nombresL1,
         distritos: distritosL1,
         avenidas: avenidasL1,
-        estados: Array(repeating: .operativa, count: estacionesL1.count),
+        estados: Array(
+            repeating: .operativa,
+            count: nombresL1.count
+        ),
         lugares: lugaresL1
     )
     
-    let estacionesL2 = [
+    // MARK: Línea 2
+    
+    let nombresL2 = [
         "Puerto del Callao",
         "Buenos Aires",
         "Juan Pablo II",
@@ -249,29 +332,42 @@ func crearLineas() -> [Linea] {
         "Municipalidad de Ate"
     ]
     
-    var estadosL2 = Array(repeating: Estado.proyectada, count: estacionesL2.count)
+    var estadosL2 = Array(
+        repeating: Estado.proyectada,
+        count: nombresL2.count
+    )
     
-    estadosL2[17] = .operativa
-    estadosL2[18] = .operativa
-    estadosL2[19] = .operativa
-    estadosL2[20] = .operativa
-    estadosL2[21] = .operativa
+    for i in 17...21 {
+        estadosL2[i] = .operativa
+    }
     
     let lugaresL2: [String: [String]] = [
-        "Evitamiento": ["Panamericana Sur"],
-        "Óvalo Santa Anita": ["Mall Aventura Santa Anita"],
-        "Colectora Industrial": ["Zona industrial de Santa Anita"],
-        "Hermilio Valdizán": ["Hospital Hermilio Valdizán"],
-        "Mercado Santa Anita": ["Gran Mercado Mayorista de Lima"]
+        "Evitamiento": [
+            "Panamericana Sur"
+        ],
+        "Óvalo Santa Anita": [
+            "Mall Aventura Santa Anita"
+        ],
+        "Colectora Industrial": [
+            "Zona industrial de Santa Anita"
+        ],
+        "Hermilio Valdizán": [
+            "Hospital Hermilio Valdizán"
+        ],
+        "Mercado Santa Anita": [
+            "Gran Mercado Mayorista de Lima"
+        ]
     ]
     
-    let l2 = crearEstaciones(
-        nombres: estacionesL2,
+    let estacionesL2 = crearEstaciones(
+        nombres: nombresL2,
         estados: estadosL2,
         lugares: lugaresL2
     )
     
-    let estacionesL3 = [
+    // MARK: Línea 3
+    
+    let nombresL3 = [
         "El Álamo",
         "Naranjal",
         "Túpac Amaru",
@@ -301,12 +397,17 @@ func crearLineas() -> [Linea] {
         "Pedro Miotta"
     ]
     
-    let l3 = crearEstaciones(
-        nombres: estacionesL3,
-        estados: Array(repeating: .proyectada, count: estacionesL3.count)
+    let estacionesL3 = crearEstaciones(
+        nombres: nombresL3,
+        estados: Array(
+            repeating: .proyectada,
+            count: nombresL3.count
+        )
     )
     
-    let estacionesL4 = [
+    // MARK: Línea 4
+    
+    let nombresL4 = [
         "Gambeta",
         "Canta Callao",
         "Bocanegra",
@@ -335,21 +436,27 @@ func crearLineas() -> [Linea] {
         "Mercado Santa Anita"
     ]
     
-    var estadosL4 = Array(repeating: Estado.proyectada, count: estacionesL4.count)
+    var estadosL4 = Array(
+        repeating: Estado.proyectada,
+        count: nombresL4.count
+    )
     
     for i in 0..<8 {
         estadosL4[i] = .construccion
     }
     
-    let l4 = crearEstaciones(
-        nombres: estacionesL4,
+    let estacionesL4 = crearEstaciones(
+        nombres: nombresL4,
         estados: estadosL4
     )
     
-    let l5 = [Estacion]()
-    let l6 = [Estacion]()
+    // MARK: Líneas 5 y 6
+    
+    let estacionesL5: [Estacion] = []
+    let estacionesL6: [Estacion] = []
     
     return [
+        
         Linea(
             numero: 1,
             nombre: "Línea 1",
@@ -357,8 +464,9 @@ func crearLineas() -> [Linea] {
             destino: "Villa El Salvador",
             estado: .operativa,
             tarifa: 1.50,
-            estaciones: l1
+            estaciones: estacionesL1
         ),
+        
         Linea(
             numero: 2,
             nombre: "Línea 2",
@@ -366,8 +474,9 @@ func crearLineas() -> [Linea] {
             destino: "Municipalidad de Ate",
             estado: .construccion,
             tarifa: 1.40,
-            estaciones: l2
+            estaciones: estacionesL2
         ),
+        
         Linea(
             numero: 3,
             nombre: "Línea 3",
@@ -375,8 +484,9 @@ func crearLineas() -> [Linea] {
             destino: "Pedro Miotta",
             estado: .proyectada,
             tarifa: nil,
-            estaciones: l3
+            estaciones: estacionesL3
         ),
+        
         Linea(
             numero: 4,
             nombre: "Línea 4",
@@ -384,8 +494,9 @@ func crearLineas() -> [Linea] {
             destino: "Mercado Santa Anita",
             estado: .construccion,
             tarifa: nil,
-            estaciones: l4
+            estaciones: estacionesL4
         ),
+        
         Linea(
             numero: 5,
             nombre: "Línea 5",
@@ -393,8 +504,9 @@ func crearLineas() -> [Linea] {
             destino: "Centro de Lima",
             estado: .proyectada,
             tarifa: nil,
-            estaciones: l5
+            estaciones: estacionesL5
         ),
+        
         Linea(
             numero: 6,
             nombre: "Línea 6",
@@ -402,16 +514,15 @@ func crearLineas() -> [Linea] {
             destino: "Santiago de Surco",
             estado: .proyectada,
             tarifa: nil,
-            estaciones: l6
+            estaciones: estacionesL6
         )
     ]
 }
 
-let lineas = crearLineas()
-
 // MARK: - CONEXIONES
 
 let conexiones: [Conexion] = [
+    
     Conexion(
         linea1: 1,
         estacion1: "La Cultura",
@@ -419,13 +530,15 @@ let conexiones: [Conexion] = [
         estacion2: "28 de Julio",
         estado: .proyectada
     ),
+    
     Conexion(
         linea1: 1,
-        estacion1: "Los Cabitos",
+        estacion1: "Cabitos",
         linea2: 3,
         estacion2: "Juana Alarco",
         estado: .proyectada
     ),
+    
     Conexion(
         linea1: 1,
         estacion1: "Atocongo",
@@ -433,6 +546,7 @@ let conexiones: [Conexion] = [
         estacion2: "Los Héroes",
         estado: .proyectada
     ),
+    
     Conexion(
         linea1: 1,
         estacion1: "La Cultura",
@@ -440,13 +554,15 @@ let conexiones: [Conexion] = [
         estacion2: "San Luis",
         estado: .proyectada
     ),
+    
     Conexion(
         linea1: 2,
-        estacion1: "Estación Central",
+        estacion1: "Central",
         linea2: 3,
         estacion2: "Estación Central",
         estado: .proyectada
     ),
+    
     Conexion(
         linea1: 2,
         estacion1: "Óscar Benavides",
@@ -456,598 +572,1023 @@ let conexiones: [Conexion] = [
     )
 ]
 
-// MARK: - MOSTRAR INFORMACIÓN DE LÍNEA
+// MARK: - SISTEMA METRO
 
-func resumenLinea(_ linea: Linea) {
-    let operativas = linea.estaciones.filter {
-        $0.estado == .operativa
-    }.count
+final class MetroSistema {
     
-    let construccion = linea.estaciones.filter {
-        $0.estado == .construccion
-    }.count
+    var lineas: [Linea] = crearLineas()
     
-    let proyectadas = linea.estaciones.filter {
-        $0.estado == .proyectada
-    }.count
+    // MARK: LISTAR LÍNEAS
     
-    print("""
-    
-    \(linea.nombre)
-    Origen: \(linea.origen)
-    Destino: \(linea.destino)
-    Estado: \(linea.estado.descripcion)
-    Estaciones: \(linea.estaciones.count)
-    Operativas: \(operativas)
-    En construcción: \(construccion)
-    Proyectadas: \(proyectadas)
-    Tarifa: \(linea.tarifa != nil ? tarifaTexto(linea.tarifa!) : "No definida")
-    """)
-}
-
-// MARK: - LISTAR LÍNEAS
-
-func listarLineas() {
-    print("\n--- LÍNEAS DEL METRO DE LIMA ---")
-    
-    for linea in lineas {
-        resumenLinea(linea)
-    }
-}
-
-// MARK: - SELECCIONAR LÍNEA
-
-func seleccionarLinea() -> Linea? {
-    print("\nIngrese el número de línea: ", terminator: "")
-    
-    guard let numero = Int(leerOpcion()) else {
-        print("Número de línea no válido.")
-        return nil
-    }
-    
-    guard let linea = lineas.first(where: {
-        $0.numero == numero
-    }) else {
-        print("La línea no existe.")
-        return nil
-    }
-    
-    return linea
-}
-
-// MARK: - CONSULTAR ESTACIONES
-
-func consultarEstacionesPorLinea() {
-    print("\n--- ESTACIONES POR LÍNEA ---")
-    
-    guard let linea = seleccionarLinea() else {
-        return
-    }
-    
-    print("\n\(linea.nombre) - \(linea.origen) → \(linea.destino)")
-    
-    if linea.estaciones.isEmpty {
-        print("Esta línea todavía no tiene estaciones registradas.")
-        return
-    }
-    
-    for (indice, estacion) in linea.estaciones.enumerated() {
-        print("\(indice + 1). \(estacion.nombre) - \(estacion.estado.descripcion)")
-    }
-}
-
-// MARK: - BUSCAR ESTACIÓN
-
-func encontrarEstacion(nombre: String) -> (Linea, Estacion)? {
-    let buscada = normalizar(nombre)
-    
-    for linea in lineas {
-        if let estacion = linea.estaciones.first(where: {
-            normalizar($0.nombre) == buscada
+    func listarLineas() {
+        
+        print("\n--- LÍNEAS DEL METRO DE LIMA ---")
+        
+        for linea in lineas.sorted(by: {
+            $0.numero < $1.numero
         }) {
-            return (linea, estacion)
-        }
-    }
-    
-    return nil
-}
-
-func conexionesDe(
-    estacion: String,
-    linea: Int
-) -> [Conexion] {
-    
-    conexiones.filter {
-        ($0.linea1 == linea &&
-         normalizar($0.estacion1) == normalizar(estacion)) ||
-        ($0.linea2 == linea &&
-         normalizar($0.estacion2) == normalizar(estacion))
-    }
-}
-
-func mostrarConexion(_ conexion: Conexion) {
-    print("""
-    
-    Conexión:
-    Línea \(conexion.linea1): \(conexion.estacion1)
-    Línea \(conexion.linea2): \(conexion.estacion2)
-    Estado: \(conexion.estado.descripcion)
-    """)
-}
-
-func buscarEstacion() {
-    print("\n--- BUSCAR ESTACIÓN ---")
-    print("Ingrese el nombre de la estación: ", terminator: "")
-    
-    let nombre = leerOpcion()
-    
-    guard let resultado = encontrarEstacion(nombre: nombre) else {
-        print("No se encontró la estación.")
-        return
-    }
-    
-    let linea = resultado.0
-    let estacion = resultado.1
-    
-    print("""
-    
-    Estación encontrada
-    
-    Nombre: \(estacion.nombre)
-    Línea: \(linea.nombre)
-    Distrito: \(estacion.distrito)
-    Avenida: \(estacion.avenida)
-    Estado: \(estacion.estado.descripcion)
-    Tarifa: \(linea.tarifa != nil ? tarifaTexto(linea.tarifa!) : "No definida")
-    """)
-    
-    if let indice = linea.estaciones.firstIndex(where: {
-        normalizar($0.nombre) == normalizar(estacion.nombre)
-    }) {
-        
-        if indice > 0 {
-            print("Estación anterior: \(linea.estaciones[indice - 1].nombre)")
-        } else {
-            print("Estación anterior: No existe")
-        }
-        
-        if indice < linea.estaciones.count - 1 {
-            print("Estación siguiente: \(linea.estaciones[indice + 1].nombre)")
-        } else {
-            print("Estación siguiente: No existe")
-        }
-    }
-    
-    if !estacion.lugaresCercanos.isEmpty {
-        print("Lugares cercanos:")
-        
-        for lugar in estacion.lugaresCercanos {
-            print("- \(lugar)")
-        }
-    } else {
-        print("Lugares cercanos: No registrados")
-    }
-    
-    let conexionesEncontradas = conexionesDe(
-        estacion: estacion.nombre,
-        linea: linea.numero
-    )
-    
-    if !conexionesEncontradas.isEmpty {
-        for conexion in conexionesEncontradas {
-            mostrarConexion(conexion)
-        }
-    } else {
-        print("Conexiones: No registradas")
-    }
-}
-
-// MARK: - LUGARES CERCANOS
-
-func consultarLugaresCercanos() {
-    print("\n--- LUGARES CERCANOS ---")
-    print("Ingrese el nombre de la estación: ", terminator: "")
-    
-    let nombre = leerOpcion()
-    
-    guard let resultado = encontrarEstacion(nombre: nombre) else {
-        print("No se encontró la estación.")
-        return
-    }
-    
-    let estacion = resultado.1
-    
-    if estacion.lugaresCercanos.isEmpty {
-        print("No hay lugares cercanos registrados para esta estación.")
-        return
-    }
-    
-    print("\nLugares cercanos a \(estacion.nombre):")
-    
-    for lugar in estacion.lugaresCercanos {
-        print("- \(lugar)")
-    }
-}
-
-// MARK: - PLANIFICAR RUTA
-
-func indiceEstacion(
-    nombre: String,
-    linea: Linea
-) -> Int? {
-    
-    linea.estaciones.firstIndex {
-        normalizar($0.nombre) == normalizar(nombre)
-    }
-}
-
-func imprimirRuta(
-    linea: Linea,
-    origen: String,
-    destino: String
-) {
-    
-    guard let indiceOrigen = indiceEstacion(
-        nombre: origen,
-        linea: linea
-    ),
-    let indiceDestino = indiceEstacion(
-        nombre: destino,
-        linea: linea
-    ) else {
-        return
-    }
-    
-    let inicio = min(indiceOrigen, indiceDestino)
-    let fin = max(indiceOrigen, indiceDestino)
-    
-    let ruta = linea.estaciones[inicio...fin]
-    
-    print("\nRecorrido:")
-    
-    for estacion in ruta {
-        print("- \(estacion.nombre)")
-    }
-    
-    print("\nCantidad de estaciones: \(ruta.count - 1)")
-}
-
-func distanciaAproximada(
-    cantidadEstaciones: Int
-) -> Double {
-    
-    Double(cantidadEstaciones) * 1.2
-}
-
-// MARK: - COBRAR VIAJE
-
-func cobrarViaje(
-    usuario: inout Usuario,
-    tarifa: Double
-) {
-    
-    print("\n¿Desea realizar este viaje?")
-    print("1. Sí")
-    print("2. No")
-    print("Seleccione una opción: ", terminator: "")
-    
-    let opcion = leerOpcion()
-    
-    switch opcion {
-        
-    case "1":
-        
-        if usuario.saldo >= tarifa {
-            
-            usuario.saldo -= tarifa
             
             print("""
             
-            Viaje realizado correctamente.
-            Tarifa cobrada: \(tarifaTexto(tarifa))
-            Saldo restante: \(tarifaTexto(usuario.saldo))
+            Línea \(linea.numero): \(linea.nombre)
+            Origen: \(linea.origen)
+            Destino: \(linea.destino)
+            Estado: \(linea.estado.descripcion)
+            Estaciones registradas: \(linea.estaciones.count)
+            Tarifa: \(linea.tarifa != nil
+                     ? tarifaTexto(linea.tarifa!)
+                     : "No definida")
+            """)
+        }
+    }
+    
+    // MARK: SELECCIONAR LÍNEA
+    
+    func seleccionarLinea() -> Int? {
+        
+        print("\nSeleccione la línea:")
+        
+        for linea in lineas.sorted(by: {
+            $0.numero < $1.numero
+        }) {
+            print("\(linea.numero). \(linea.nombre)")
+        }
+        
+        print("Ingrese una opción: ", terminator: "")
+        
+        guard let numero = Int(leerOpcion()) else {
+            print("Opción no válida.")
+            return nil
+        }
+        
+        guard lineas.contains(where: {
+            $0.numero == numero
+        }) else {
+            print("La línea no existe.")
+            return nil
+        }
+        
+        return numero
+    }
+    
+    // MARK: INFORMACIÓN DE LÍNEA
+    
+    func mostrarInformacionLinea() {
+        
+        print("\n--- INFORMACIÓN DE LÍNEA ---")
+        
+        guard let numero = seleccionarLinea() else {
+            return
+        }
+        
+        guard let linea = lineas.first(where: {
+            $0.numero == numero
+        }) else {
+            return
+        }
+        
+        let operativas = linea.estaciones.filter {
+            $0.estado == .operativa
+        }.count
+        
+        let construccion = linea.estaciones.filter {
+            $0.estado == .construccion
+        }.count
+        
+        let proyectadas = linea.estaciones.filter {
+            $0.estado == .proyectada
+        }.count
+        
+        print("""
+        
+        Línea: \(linea.nombre)
+        Origen: \(linea.origen)
+        Destino: \(linea.destino)
+        Estado: \(linea.estado.descripcion)
+        Estaciones registradas: \(linea.estaciones.count)
+        Operativas: \(operativas)
+        En construcción: \(construccion)
+        Proyectadas: \(proyectadas)
+        Tarifa: \(linea.tarifa != nil
+                 ? tarifaTexto(linea.tarifa!)
+                 : "No definida")
+        """)
+    }
+    
+    // MARK: ESTACIONES POR LÍNEA
+    
+    func consultarEstacionesPorLinea() {
+        
+        print("\n--- ESTACIONES POR LÍNEA ---")
+        
+        guard let numero = seleccionarLinea() else {
+            return
+        }
+        
+        guard let linea = lineas.first(where: {
+            $0.numero == numero
+        }) else {
+            return
+        }
+        
+        if linea.estaciones.isEmpty {
+            print("\nEsta línea todavía no tiene estaciones registradas.")
+            return
+        }
+        
+        print("\n--- \(linea.nombre) ---")
+        
+        for (indice, estacion) in linea.estaciones.enumerated() {
+            
+            print(
+                "\(indice + 1). \(estacion.nombre) - \(estacion.estado.descripcion)"
+            )
+        }
+    }
+    
+    // MARK: BUSCAR ESTACIÓN
+    
+    func encontrarEstacion(
+        nombre: String
+    ) -> [(Linea, Estacion)] {
+        
+        let buscada = normalizar(nombre)
+        
+        var resultados: [(Linea, Estacion)] = []
+        
+        for linea in lineas {
+            
+            for estacion in linea.estaciones {
+                
+                if normalizar(estacion.nombre) == buscada {
+                    resultados.append((linea, estacion))
+                }
+            }
+        }
+        
+        return resultados
+    }
+    
+    func buscarEstacion() {
+        
+        print("\n--- BUSCAR ESTACIÓN ---")
+        print("Ingrese el nombre de la estación: ", terminator: "")
+        
+        let nombre = leerOpcion()
+        
+        let resultados = encontrarEstacion(
+            nombre: nombre
+        )
+        
+        if resultados.isEmpty {
+            print("No se encontró la estación.")
+            return
+        }
+        
+        for (linea, estacion) in resultados {
+            
+            print("""
+            
+            Estación: \(estacion.nombre)
+            Línea: \(linea.nombre)
+            Estado: \(estacion.estado.descripcion)
+            Distrito: \(estacion.distrito)
+            Avenida: \(estacion.avenida)
             """)
             
-        } else {
+            print("Estaciones cercanas:")
+            
+            for cercana in estacion.estacionesCercanas {
+                print("- \(cercana)")
+            }
+            
+            if estacion.lugaresCercanos.isEmpty == false {
+                
+                print("Lugares cercanos:")
+                
+                for lugar in estacion.lugaresCercanos {
+                    print("- \(lugar)")
+                }
+            }
+            
+            let conexionesEncontradas = conexionesDe(
+                linea: linea.numero,
+                estacion: estacion.nombre
+            )
+            
+            if conexionesEncontradas.isEmpty == false {
+                
+                print("Conexiones:")
+                
+                for conexion in conexionesEncontradas {
+                    mostrarConexion(conexion)
+                }
+            }
+        }
+    }
+    
+    // MARK: LUGARES CERCANOS
+    
+    func consultarLugaresCercanos() {
+        
+        print("\n--- LUGARES CERCANOS ---")
+        print("Ingrese el nombre de la estación: ", terminator: "")
+        
+        let nombre = leerOpcion()
+        
+        let resultados = encontrarEstacion(
+            nombre: nombre
+        )
+        
+        if resultados.isEmpty {
+            print("No se encontró la estación.")
+            return
+        }
+        
+        for (linea, estacion) in resultados {
+            
+            print("\nEstación: \(estacion.nombre)")
+            print("Línea: \(linea.nombre)")
+            
+            if estacion.lugaresCercanos.isEmpty {
+                print("No hay lugares cercanos registrados.")
+            } else {
+                
+                for lugar in estacion.lugaresCercanos {
+                    print("- \(lugar)")
+                }
+            }
+        }
+    }
+    
+    // MARK: CONEXIONES
+    
+    func conexionesDe(
+        linea: Int,
+        estacion: String
+    ) -> [Conexion] {
+        
+        let buscada = normalizar(estacion)
+        
+        return conexiones.filter { conexion in
+            
+            (
+                conexion.linea1 == linea &&
+                normalizar(conexion.estacion1) == buscada
+            )
+            ||
+            (
+                conexion.linea2 == linea &&
+                normalizar(conexion.estacion2) == buscada
+            )
+        }
+    }
+    
+    func mostrarConexion(_ conexion: Conexion) {
+        
+        print(
+            "Línea \(conexion.linea1) \(conexion.estacion1) ↔ Línea \(conexion.linea2) \(conexion.estacion2) - \(conexion.estado.descripcion)"
+        )
+    }
+    
+    // MARK: RUTA
+    
+    func indiceEstacion(
+        nombre: String,
+        linea: Linea
+    ) -> Int? {
+        
+        let buscada = normalizar(nombre)
+        
+        return linea.estaciones.firstIndex {
+            normalizar($0.nombre) == buscada
+        }
+    }
+    
+    func imprimirRuta(
+        linea: Linea,
+        origen: Int,
+        destino: Int
+    ) {
+        
+        let paso = origen <= destino ? 1 : -1
+        var posicion = origen
+        
+        while true {
+            
+            print("- \(linea.estaciones[posicion].nombre)")
+            
+            if posicion == destino {
+                break
+            }
+            
+            posicion += paso
+        }
+    }
+    
+    func distanciaAproximada(
+        estaciones: Int
+    ) -> Double {
+        
+        return Double(estaciones) * 1.2
+    }
+    
+    // MARK: COBRAR VIAJE
+    
+    func cobrarViaje(
+        usuario: inout Usuario,
+        tarifa: Double
+    ) {
+        
+        if usuario.saldo < tarifa {
             
             print("""
             
             Saldo insuficiente.
-            Tarifa del viaje: \(tarifaTexto(tarifa))
-            Saldo disponible: \(tarifaTexto(usuario.saldo))
-            
-            Recargue su tarjeta para realizar el viaje.
+            Saldo actual: \(tarifaTexto(usuario.saldo))
+            Tarifa: \(tarifaTexto(tarifa))
             """)
-        }
-        
-    case "2":
-        print("\nViaje cancelado. No se realizó ningún cobro.")
-        
-    default:
-        print("\nOpción no válida. No se realizó ningún cobro.")
-    }
-}
-
-// MARK: - PLANIFICAR RUTA
-
-func planificarRuta(usuario: inout Usuario) {
-    
-    print("\n--- PLANIFICAR RUTA ---")
-    
-    print("Estación de origen: ", terminator: "")
-    let origenTexto = leerOpcion()
-    
-    print("Estación de destino: ", terminator: "")
-    let destinoTexto = leerOpcion()
-    
-    guard let origen = encontrarEstacion(
-        nombre: origenTexto
-    ) else {
-        print("No se encontró la estación de origen.")
-        return
-    }
-    
-    guard let destino = encontrarEstacion(
-        nombre: destinoTexto
-    ) else {
-        print("No se encontró la estación de destino.")
-        return
-    }
-    
-    let lineaOrigen = origen.0
-    let lineaDestino = destino.0
-    
-    // MISMA LÍNEA
-    
-    if lineaOrigen.numero == lineaDestino.numero {
-        
-        guard let indiceOrigen = indiceEstacion(
-            nombre: origen.1.nombre,
-            linea: lineaOrigen
-        ),
-        let indiceDestino = indiceEstacion(
-            nombre: destino.1.nombre,
-            linea: lineaOrigen
-        ) else {
-            print("No se pudo calcular la ruta.")
+            
             return
         }
         
-        let cantidadEstaciones = abs(
-            indiceDestino - indiceOrigen
-        )
+        usuario.saldo -= tarifa
         
         print("""
         
-        Ruta encontrada
-        
-        Línea: \(lineaOrigen.nombre)
-        Origen: \(origen.1.nombre)
-        Destino: \(destino.1.nombre)
-        Estaciones por recorrer: \(cantidadEstaciones)
-        Distancia aproximada: \(String(format: "%.1f km", distanciaAproximada(cantidadEstaciones: cantidadEstaciones)))
+        Viaje realizado correctamente.
+        Tarifa cobrada: \(tarifaTexto(tarifa))
+        Saldo restante: \(tarifaTexto(usuario.saldo))
         """)
+    }
+    
+    // MARK: PLANIFICAR RUTA
+    
+    func planificarRuta(
+        usuario: inout Usuario
+    ) {
         
-        imprimirRuta(
-            linea: lineaOrigen,
-            origen: origen.1.nombre,
-            destino: destino.1.nombre
+        print("\n--- PLANIFICAR RUTA ---")
+        
+        print("Estación de origen: ", terminator: "")
+        let origenTexto = leerOpcion()
+        
+        print("Estación de destino: ", terminator: "")
+        let destinoTexto = leerOpcion()
+        
+        let origenResultados = encontrarEstacion(
+            nombre: origenTexto
         )
         
-        guard let tarifa = lineaOrigen.tarifa else {
-            print("\nEsta línea no tiene una tarifa definida.")
+        let destinoResultados = encontrarEstacion(
+            nombre: destinoTexto
+        )
+        
+        if origenResultados.isEmpty {
+            print("No se encontró la estación de origen.")
             return
         }
         
-        print("\nTarifa del viaje: \(tarifaTexto(tarifa))")
-        print("Saldo actual: \(tarifaTexto(usuario.saldo))")
+        if destinoResultados.isEmpty {
+            print("No se encontró la estación de destino.")
+            return
+        }
         
-        cobrarViaje(
-            usuario: &usuario,
-            tarifa: tarifa
-        )
+        let origen = origenResultados[0]
+        let destino = destinoResultados[0]
         
-    } else {
+        // MISMA LÍNEA
+        
+        if origen.0.numero == destino.0.numero {
+            
+            guard let indiceOrigen = indiceEstacion(
+                nombre: origen.1.nombre,
+                linea: origen.0
+            ),
+            let indiceDestino = indiceEstacion(
+                nombre: destino.1.nombre,
+                linea: destino.0
+            ) else {
+                
+                print("No se pudo calcular la ruta.")
+                return
+            }
+            
+            let cantidad = abs(
+                indiceDestino - indiceOrigen
+            )
+            
+            let distancia = distanciaAproximada(
+                estaciones: cantidad
+            )
+            
+            print("""
+            
+            --- RUTA ENCONTRADA ---
+            
+            Línea: \(origen.0.nombre)
+            Origen: \(origen.1.nombre)
+            Destino: \(destino.1.nombre)
+            Estaciones a recorrer: \(cantidad)
+            Distancia aproximada: \(String(format: "%.1f", distancia)) km
+            """)
+            
+            print("\nRecorrido:")
+            
+            imprimirRuta(
+                linea: origen.0,
+                origen: indiceOrigen,
+                destino: indiceDestino
+            )
+            
+            guard let tarifa = origen.0.tarifa else {
+                
+                print("\nEsta línea no tiene tarifa definida.")
+                return
+            }
+            
+            print("\nTarifa: \(tarifaTexto(tarifa))")
+            
+            print(
+                "¿Desea realizar el viaje? (s/n): ",
+                terminator: ""
+            )
+            
+            let respuesta = normalizar(
+                leerOpcion()
+            )
+            
+            if respuesta == "s" || respuesta == "si" {
+                
+                cobrarViaje(
+                    usuario: &usuario,
+                    tarifa: tarifa
+                )
+                
+            } else {
+                
+                print("Viaje cancelado.")
+            }
+            
+            return
+        }
         
         // DIFERENTES LÍNEAS
         
-        let conexionesEncontradas = conexiones.filter {
-            ($0.linea1 == lineaOrigen.numero &&
-             $0.linea2 == lineaDestino.numero) ||
-            ($0.linea1 == lineaDestino.numero &&
-             $0.linea2 == lineaOrigen.numero)
+        let posiblesConexiones = conexiones.filter {
+            conexion in
+            
+            (
+                conexion.linea1 == origen.0.numero &&
+                conexion.linea2 == destino.0.numero
+            )
+            ||
+            (
+                conexion.linea2 == origen.0.numero &&
+                conexion.linea1 == destino.0.numero
+            )
         }
         
-        guard let conexion = conexionesEncontradas.first else {
-            print("No existe una conexión registrada entre estas líneas.")
+        if posiblesConexiones.isEmpty {
+            
+            print("""
+            
+            No existe una conexión registrada entre
+            \(origen.0.nombre) y \(destino.0.nombre).
+            """)
+            
             return
         }
+        
+        let conexion = posiblesConexiones[0]
+        
+        print("\n--- CONEXIÓN ENCONTRADA ---")
+        mostrarConexion(conexion)
+        
+        if conexion.estado != .operativa {
+            
+            print("""
+            
+            Esta conexión todavía no está operativa.
+            No se puede realizar el viaje por transbordo.
+            """)
+            
+            return
+        }
+        
+        guard let tarifa1 = origen.0.tarifa,
+              let tarifa2 = destino.0.tarifa else {
+            
+            print("No se puede calcular la tarifa.")
+            return
+        }
+        
+        let tarifaTotal = tarifa1 + tarifa2
         
         print("""
         
-        Ruta con transbordo
+        Ruta con transbordo:
+        1. \(origen.0.nombre)
+        2. Transbordo
+        3. \(destino.0.nombre)
         
-        Línea de origen: \(lineaOrigen.nombre)
-        Línea de destino: \(lineaDestino.nombre)
-        
-        Punto de conexión:
-        \(conexion.estacion1) ↔ \(conexion.estacion2)
-        
-        Estado de la conexión: \(conexion.estado.descripcion)
+        Tarifa total: \(tarifaTexto(tarifaTotal))
         """)
         
-        if conexion.estado != .operativa {
-            print("\nLa conexión todavía no está operativa.")
-            print("La ruta no puede realizarse actualmente.")
+        print(
+            "¿Desea realizar el viaje? (s/n): ",
+            terminator: ""
+        )
+        
+        let respuesta = normalizar(
+            leerOpcion()
+        )
+        
+        if respuesta == "s" || respuesta == "si" {
+            
+            cobrarViaje(
+                usuario: &usuario,
+                tarifa: tarifaTotal
+            )
+            
+        } else {
+            
+            print("Viaje cancelado.")
+        }
+    }
+    
+    // MARK: SALDO
+    
+    func consultarSaldo(
+        usuario: Usuario
+    ) {
+        
+        print("""
+        
+        --- SALDO ---
+        Usuario: \(usuario.nombre)
+        Saldo disponible: \(tarifaTexto(usuario.saldo))
+        """)
+    }
+    
+    func recargarSaldo(
+        usuario: inout Usuario
+    ) {
+        
+        print("\n--- RECARGAR TARJETA ---")
+        print("Ingrese el monto: ", terminator: "")
+        
+        guard let monto = Double(leerOpcion()),
+              monto > 0 else {
+            
+            print("Monto no válido.")
             return
         }
         
-        guard let tarifaOrigen = lineaOrigen.tarifa,
-              let tarifaDestino = lineaDestino.tarifa else {
-            print("\nNo se puede calcular la tarifa de esta ruta.")
-            return
-        }
+        usuario.saldo += monto
         
-        let tarifaTotal = tarifaOrigen + tarifaDestino
+        print("""
         
-        print("\nTarifa total: \(tarifaTexto(tarifaTotal))")
-        print("Saldo actual: \(tarifaTexto(usuario.saldo))")
-        
-        cobrarViaje(
-            usuario: &usuario,
-            tarifa: tarifaTotal
-        )
-    }
-}
-
-// MARK: - CONSULTAR SALDO
-
-func consultarSaldo(usuario: Usuario) {
-    
-    print("""
-    
-    --- SALDO DE TARJETA ---
-    
-    Usuario: \(usuario.nombre)
-    Saldo actual: \(tarifaTexto(usuario.saldo))
-    """)
-}
-
-// MARK: - RECARGAR TARJETA
-
-func recargarSaldo(usuario: inout Usuario) {
-    
-    print("\n--- RECARGAR TARJETA ---")
-    print("Saldo actual: \(tarifaTexto(usuario.saldo))")
-    print("Ingrese el monto a recargar: S/ ", terminator: "")
-    
-    let textoMonto = leerOpcion()
-    
-    guard let monto = Double(textoMonto) else {
-        print("Monto no válido.")
-        return
+        Recarga realizada correctamente.
+        Monto recargado: \(tarifaTexto(monto))
+        Nuevo saldo: \(tarifaTexto(usuario.saldo))
+        """)
     }
     
-    guard monto > 0 else {
-        print("El monto debe ser mayor a S/ 0.00.")
-        return
-    }
+    // MARK: MENÚ USUARIO
     
-    usuario.saldo += monto
-    
-    print("""
-    
-    Recarga realizada correctamente.
-    Monto recargado: \(tarifaTexto(monto))
-    Nuevo saldo: \(tarifaTexto(usuario.saldo))
-    """)
-}
-
-// MARK: - MENÚ DE USUARIO
-
-func mostrarMenuUsuario(usuario: Usuario) {
-    
-    print("""
-    
-    ====================================
-               METRO DE LIMA
-    ====================================
-    
-    Hola, \(usuario.nombre)
-    Saldo actual: \(tarifaTexto(usuario.saldo))
-    
-    ------------- USUARIO --------------
-    
-    1. Listar líneas
-    2. Consultar estaciones por línea
-    3. Buscar estación
-    4. Información de líneas
-    5. Consultar lugares cercanos
-    6. Planificar ruta
-    7. Consultar saldo
-    8. Recargar tarjeta
-    9. Salir
-    
-    ====================================
-    """)
-    
-    print("Seleccione una opción: ", terminator: "")
-}
-
-// MARK: - PROGRAMA PRINCIPAL
-
-print("""
-====================================
-           METRO DE LIMA
-====================================
-""")
-
-print("Ingrese su nombre: ", terminator: "")
-let nombreUsuario = leerOpcion()
-
-if nombreUsuario.isEmpty {
-    
-    print("Debe ingresar un nombre para continuar.")
-    
-} else {
-    
-    var usuarioActual = Usuario(
-        nombre: nombreUsuario,
-        saldo: 0.0
-    )
-    
-    var ejecutando = true
-    
-    while ejecutando {
+    func menuUsuario(
+        usuario: inout Usuario
+    ) {
         
-        mostrarMenuUsuario(
-            usuario: usuarioActual
-        )
+        var ejecutando = true
         
-        switch leerOpcion() {
+        while ejecutando {
             
-        case "1":
-            listarLineas()
+            print("""
             
-        case "2":
-            consultarEstacionesPorLinea()
             
-        case "3":
-            buscarEstacion()
+            ========================================
+                     MENÚ DE USUARIO
+            ========================================
             
-        case "4":
-            print("\n--- INFORMACIÓN DE LÍNEAS ---")
+            Usuario: \(usuario.nombre)
             
-            lineas.forEach {
-                resumenLinea($0)
+            1. Listar líneas
+            2. Consultar estaciones por línea
+            3. Buscar estación
+            4. Información de líneas
+            5. Consultar lugares cercanos
+            6. Planificar ruta
+            7. Consultar saldo
+            8. Recargar tarjeta
+            9. Cerrar sesión
+            
+            Seleccione una opción:
+            """)
+            
+            switch leerOpcion() {
+                
+            case "1":
+                listarLineas()
+                
+            case "2":
+                consultarEstacionesPorLinea()
+                
+            case "3":
+                buscarEstacion()
+                
+            case "4":
+                mostrarInformacionLinea()
+                
+            case "5":
+                consultarLugaresCercanos()
+                
+            case "6":
+                planificarRuta(
+                    usuario: &usuario
+                )
+                
+            case "7":
+                consultarSaldo(
+                    usuario: usuario
+                )
+                
+            case "8":
+                recargarSaldo(
+                    usuario: &usuario
+                )
+                
+            case "9":
+                ejecutando = false
+                print("\nSesión cerrada.")
+                
+            default:
+                print("Opción no válida.")
             }
+        }
+    }
+    
+    // MARK: ADMINISTRADOR
+    
+    func menuAdministrador() {
+        
+        var ejecutando = true
+        
+        while ejecutando {
             
-        case "5":
-            consultarLugaresCercanos()
+            print("""
             
-        case "6":
-            planificarRuta(
-                usuario: &usuarioActual
+            
+            ========================================
+                  MENÚ DE ADMINISTRADOR
+            ========================================
+            
+            1. Ver todas las líneas
+            2. Ver estaciones de una línea
+            3. Buscar estación
+            4. Agregar estación al final
+            5. Insertar estación intermedia
+            6. Crear nueva línea
+            7. Cerrar sesión
+            
+            Seleccione una opción:
+            """)
+            
+            switch leerOpcion() {
+                
+            case "1":
+                listarLineas()
+                
+            case "2":
+                consultarEstacionesPorLinea()
+                
+            case "3":
+                buscarEstacion()
+                
+            case "4":
+                agregarEstacionAlFinal()
+                
+            case "5":
+                insertarEstacionIntermedia()
+                
+            case "6":
+                crearNuevaLinea()
+                
+            case "7":
+                ejecutando = false
+                print("\nSesión de administrador cerrada.")
+                
+            default:
+                print("Opción no válida.")
+            }
+        }
+    }
+    
+    // MARK: AGREGAR ESTACIÓN
+    
+    func agregarEstacionAlFinal() {
+        
+        print("\n--- AGREGAR ESTACIÓN AL FINAL ---")
+        
+        guard let numero = seleccionarLinea() else {
+            return
+        }
+        
+        guard let indiceLinea = lineas.firstIndex(
+            where: {
+                $0.numero == numero
+            }
+        ) else {
+            return
+        }
+        
+        print("Nombre de la estación: ", terminator: "")
+        let nombre = leerOpcion()
+        
+        if nombre.isEmpty {
+            print("El nombre no puede estar vacío.")
+            return
+        }
+        
+        print("Distrito: ", terminator: "")
+        let distrito = leerOpcion()
+        
+        print("Avenida: ", terminator: "")
+        let avenida = leerOpcion()
+        
+        let estado = leerEstado()
+        
+        let nuevaEstacion = Estacion(
+            nombre: nombre,
+            distrito: distrito.isEmpty
+                ? "Por definir"
+                : distrito,
+            avenida: avenida.isEmpty
+                ? "Por definir"
+                : avenida,
+            estado: estado,
+            lugaresCercanos: [],
+            estacionesCercanas: []
+        )
+        
+        lineas[indiceLinea].estaciones.append(
+            nuevaEstacion
+        )
+        
+        actualizarEstacionesCercanas(
+            estaciones: &lineas[indiceLinea].estaciones
+        )
+        
+        print("\nEstación agregada correctamente.")
+    }
+    
+    // MARK: INSERTAR ESTACIÓN
+    
+    func insertarEstacionIntermedia() {
+        
+        print("\n--- INSERTAR ESTACIÓN INTERMEDIA ---")
+        
+        guard let numero = seleccionarLinea() else {
+            return
+        }
+        
+        guard let indiceLinea = lineas.firstIndex(
+            where: {
+                $0.numero == numero
+            }
+        ) else {
+            return
+        }
+        
+        if lineas[indiceLinea].estaciones.isEmpty {
+            
+            print("La línea no tiene estaciones.")
+            return
+        }
+        
+        print("\nEstaciones actuales:")
+        
+        for (indice, estacion) in lineas[indiceLinea].estaciones.enumerated() {
+            
+            print(
+                "\(indice + 1). \(estacion.nombre)"
             )
+        }
+        
+        print("\nIngrese la estación después de la cual desea insertar:")
+        print("Nombre: ", terminator: "")
+        
+        let referencia = leerOpcion()
+        
+        guard let posicion = lineas[indiceLinea].estaciones.firstIndex(
+            where: {
+                normalizar($0.nombre) == normalizar(referencia)
+            }
+        ) else {
             
-        case "7":
-            consultarSaldo(
-                usuario: usuarioActual
-            )
+            print("No se encontró la estación indicada.")
+            return
+        }
+        
+        print("Nombre de la nueva estación: ", terminator: "")
+        let nombre = leerOpcion()
+        
+        if nombre.isEmpty {
+            print("El nombre no puede estar vacío.")
+            return
+        }
+        
+        print("Distrito: ", terminator: "")
+        let distrito = leerOpcion()
+        
+        print("Avenida: ", terminator: "")
+        let avenida = leerOpcion()
+        
+        let estado = leerEstado()
+        
+        let nuevaEstacion = Estacion(
+            nombre: nombre,
+            distrito: distrito.isEmpty
+                ? "Por definir"
+                : distrito,
+            avenida: avenida.isEmpty
+                ? "Por definir"
+                : avenida,
+            estado: estado,
+            lugaresCercanos: [],
+            estacionesCercanas: []
+        )
+        
+        lineas[indiceLinea].estaciones.insert(
+            nuevaEstacion,
+            at: posicion + 1
+        )
+        
+        actualizarEstacionesCercanas(
+            estaciones: &lineas[indiceLinea].estaciones
+        )
+        
+        print("\nEstación insertada correctamente.")
+    }
+    
+    // MARK: CREAR NUEVA LÍNEA
+    
+    func crearNuevaLinea() {
+        
+        print("\n--- CREAR NUEVA LÍNEA ---")
+        
+        let nuevoNumero = (
+            lineas.map {
+                $0.numero
+            }.max() ?? 0
+        ) + 1
+        
+        print("Número asignado: \(nuevoNumero)")
+        
+        print("Nombre de la línea: ", terminator: "")
+        let nombre = leerOpcion()
+        
+        if nombre.isEmpty {
+            print("El nombre no puede estar vacío.")
+            return
+        }
+        
+        print("Origen: ", terminator: "")
+        let origen = leerOpcion()
+        
+        print("Destino: ", terminator: "")
+        let destino = leerOpcion()
+        
+        let estado = leerEstado()
+        
+        print("¿Desea agregar una tarifa? (s/n): ", terminator: "")
+        let respuesta = normalizar(leerOpcion())
+        
+        var tarifa: Double? = nil
+        
+        if respuesta == "s" || respuesta == "si" {
             
-        case "8":
-            recargarSaldo(
-                usuario: &usuarioActual
-            )
+            print("Ingrese la tarifa: ", terminator: "")
             
-        case "9":
-            ejecutando = false
-            print("\nGracias por usar el Metro de Lima.")
+            if let valor = Double(leerOpcion()),
+               valor >= 0 {
+                
+                tarifa = valor
+            }
+        }
+        
+        let nuevaLinea = Linea(
+            numero: nuevoNumero,
+            nombre: nombre,
+            origen: origen,
+            destino: destino,
+            estado: estado,
+            tarifa: tarifa,
+            estaciones: []
+        )
+        
+        lineas.append(nuevaLinea)
+        
+        print("""
+        
+        Línea creada correctamente.
+        Número: \(nuevoNumero)
+        """)
+    }
+    
+    // MARK: INICIAR SISTEMA
+    
+    func iniciar() {
+        
+        print("""
+        
+        
+        ========================================
+              SISTEMA METRO DE LIMA
+        ========================================
+        """)
+        
+        print("Ingrese su nombre: ", terminator: "")
+        
+        let nombre = leerOpcion()
+        
+        if nombre.isEmpty {
             
-        default:
-            print("Opción no válida. Seleccione un número del 1 al 9.")
+            print("Debe ingresar un nombre para continuar.")
+            return
+        }
+        
+        var usuario = Usuario(
+            nombre: nombre,
+            saldo: 0.0
+        )
+        
+        var ejecutando = true
+        
+        while ejecutando {
+            
+            print("""
+            
+            
+            ========================================
+                    INICIO DE SESIÓN
+            ========================================
+            
+            1. Ingresar como usuario
+            2. Ingresar como administrador
+            3. Salir
+            
+            Seleccione una opción:
+            """)
+            
+            switch leerOpcion() {
+                
+            case "1":
+                
+                menuUsuario(
+                    usuario: &usuario
+                )
+                
+            case "2":
+                
+                print("\n--- ACCESO ADMINISTRADOR ---")
+                print("Contraseña: ", terminator: "")
+                
+                let password = leerOpcion()
+                
+                if password == "admin123" {
+                    
+                    print("\nAcceso correcto.")
+                    
+                    menuAdministrador()
+                    
+                } else {
+                    
+                    print("\nContraseña incorrecta.")
+                }
+                
+            case "3":
+                
+                ejecutando = false
+                
+                print("""
+                
+                
+                ========================================
+                Gracias por usar el Metro de Lima.
+                ========================================
+                """)
+                
+            default:
+                
+                print("Opción no válida.")
+            }
         }
     }
 }
 
+// MARK: - EJECUTAR
 
+let sistemaMetro = MetroSistema()
+sistemaMetro.iniciar()
