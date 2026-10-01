@@ -9,6 +9,16 @@ import UIKit
 
 class ViewControllerConfirmacion: UIViewController {
 
+    
+    @IBOutlet weak var lblApellidos: UILabel!
+    
+    
+    
+    @IBOutlet weak var lblNombres: UILabel!
+    
+    
+    @IBOutlet weak var lblDni: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
