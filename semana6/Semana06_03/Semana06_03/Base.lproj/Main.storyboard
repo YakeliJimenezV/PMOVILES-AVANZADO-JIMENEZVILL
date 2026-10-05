@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="navigation-vc">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="navigation-scene">
+            <objects>
+                <navigationController id="navigation-vc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="navigation-bar">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sale-vc" kind="relationship" relationship="rootViewController" id="root-sale"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nav-responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Nueva Venta-->
+        <scene sceneID="sale">
+            <objects>
+                <viewController id="sale-vc" customClass="ViewController" customModule="Semana06_03" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sale-view">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Electrodoméstico:" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label-electrodomestico">
+                                <rect key="frame" x="24" y="188" width="138" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Televisor" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="field-electrodomestico">
+                                <rect key="frame" x="24" y="214.33333333333334" width="345" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Precio unitario:" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label-precioUnitario">
+                                <rect key="frame" x="24" y="270" width="114" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="3500" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="field-precioUnitario">
+                                <rect key="frame" x="24" y="296.33333333333331" width="345" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Cantidad:" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label-cantidad">
+                                <rect key="frame" x="24" y="352" width="73.333333333333329" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="field-cantidad">
+                                <rect key="frame" x="24" y="378.33333333333331" width="345" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Meses:" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label-meses">
+                                <rect key="frame" x="23.999999999999996" y="434" width="54.666666666666657" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="12" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="field-meses">
+                                <rect key="frame" x="24" y="460.33333333333331" width="345" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Interés mensual (%):" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="label-tasaInteresMensual">
+                                <rect key="frame" x="24" y="516" width="157" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="field-tasaInteresMensual">
+                                <rect key="frame" x="24" y="542.33333333333337" width="345" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="calculate">
+                                <rect key="frame" x="24" y="600.33333333333337" width="345" height="44"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Calcular"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Calcular">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="result-vc" kind="show" identifier="showResultado" id="show-result"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sale-safe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="calculate" firstAttribute="height" constant="44" id="bh"/>
+                            <constraint firstItem="calculate" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="bl"/>
+                            <constraint firstItem="calculate" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="br"/>
+                            <constraint firstItem="calculate" firstAttribute="top" secondItem="field-tasaInteresMensual" secondAttribute="bottom" constant="20" id="bt"/>
+                            <constraint firstItem="label-electrodomestico" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="fl0"/>
+                            <constraint firstItem="label-precioUnitario" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="fl1"/>
+                            <constraint firstItem="label-cantidad" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="fl2"/>
+                            <constraint firstItem="label-meses" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="fl3"/>
+                            <constraint firstItem="label-tasaInteresMensual" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="fl4"/>
+                            <constraint firstItem="label-electrodomestico" firstAttribute="top" secondItem="sale-safe" secondAttribute="top" constant="16" id="ft0"/>
+                            <constraint firstItem="label-precioUnitario" firstAttribute="top" secondItem="sale-safe" secondAttribute="top" constant="98" id="ft1"/>
+                            <constraint firstItem="label-cantidad" firstAttribute="top" secondItem="sale-safe" secondAttribute="top" constant="180" id="ft2"/>
+                            <constraint firstItem="label-meses" firstAttribute="top" secondItem="sale-safe" secondAttribute="top" constant="262" id="ft3"/>
+                            <constraint firstItem="label-tasaInteresMensual" firstAttribute="top" secondItem="sale-safe" secondAttribute="top" constant="344" id="ft4"/>
+                            <constraint firstItem="field-electrodomestico" firstAttribute="height" constant="38" id="ih0"/>
+                            <constraint firstItem="field-precioUnitario" firstAttribute="height" constant="38" id="ih1"/>
+                            <constraint firstItem="field-cantidad" firstAttribute="height" constant="38" id="ih2"/>
+                            <constraint firstItem="field-meses" firstAttribute="height" constant="38" id="ih3"/>
+                            <constraint firstItem="field-tasaInteresMensual" firstAttribute="height" constant="38" id="ih4"/>
+                            <constraint firstItem="field-electrodomestico" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="il0"/>
+                            <constraint firstItem="field-precioUnitario" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="il1"/>
+                            <constraint firstItem="field-cantidad" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="il2"/>
+                            <constraint firstItem="field-meses" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="il3"/>
+                            <constraint firstItem="field-tasaInteresMensual" firstAttribute="leading" secondItem="sale-safe" secondAttribute="leading" constant="24" id="il4"/>
+                            <constraint firstItem="field-electrodomestico" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="ir0"/>
+                            <constraint firstItem="field-precioUnitario" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="ir1"/>
+                            <constraint firstItem="field-cantidad" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="ir2"/>
+                            <constraint firstItem="field-meses" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="ir3"/>
+                            <constraint firstItem="field-tasaInteresMensual" firstAttribute="trailing" secondItem="sale-safe" secondAttribute="trailing" constant="-24" id="ir4"/>
+                            <constraint firstItem="field-electrodomestico" firstAttribute="top" secondItem="label-electrodomestico" secondAttribute="bottom" constant="6" id="it0"/>
+                            <constraint firstItem="field-precioUnitario" firstAttribute="top" secondItem="label-precioUnitario" secondAttribute="bottom" constant="6" id="it1"/>
+                            <constraint firstItem="field-cantidad" firstAttribute="top" secondItem="label-cantidad" secondAttribute="bottom" constant="6" id="it2"/>
+                            <constraint firstItem="field-meses" firstAttribute="top" secondItem="label-meses" secondAttribute="bottom" constant="6" id="it3"/>
+                            <constraint firstItem="field-tasaInteresMensual" firstAttribute="top" secondItem="label-tasaInteresMensual" secondAttribute="bottom" constant="6" id="it4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Nueva Venta" id="sale-nav"/>
+                    <connections>
+                        <outlet property="cantidadTextField" destination="field-cantidad" id="out-cantidad"/>
+                        <outlet property="electrodomesticoTextField" destination="field-electrodomestico" id="out-electrodomestico"/>
+                        <outlet property="mesesTextField" destination="field-meses" id="out-meses"/>
+                        <outlet property="precioUnitarioTextField" destination="field-precioUnitario" id="out-precioUnitario"/>
+                        <outlet property="tasaInteresMensualTextField" destination="field-tasaInteresMensual" id="out-tasaInteresMensual"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sale-responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800" y="0.0"/>
+        </scene>
+        <!--Resultado-->
+        <scene sceneID="result">
+            <objects>
+                <viewController id="result-vc" customClass="ResultadoViewController" customModule="Semana06_03" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="result-view">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Subtotal" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-subtotal">
+                                <rect key="frame" x="24" y="196" width="150" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-subtotal">
+                                <rect key="frame" x="186" y="196" width="183" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="IGV (18%)" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-igv">
+                                <rect key="frame" x="24" y="250.00000000000003" width="150" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-igv">
+                                <rect key="frame" x="186" y="250.00000000000003" width="183" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Base" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-base">
+                                <rect key="frame" x="24" y="304" width="150" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-base">
+                                <rect key="frame" x="186" y="304" width="183" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Intereses" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-intereses">
+                                <rect key="frame" x="24" y="358" width="150" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-intereses">
+                                <rect key="frame" x="186" y="358" width="183" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-total">
+                                <rect key="frame" x="24" y="428" width="150" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-total">
+                                <rect key="frame" x="186" y="428" width="183" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Cuota mensual" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="title-cuota">
+                                <rect key="frame" x="24" y="482" width="150" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" systemColor="linkColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="value-cuota">
+                                <rect key="frame" x="186" y="482" width="183" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="separator">
+                                <rect key="frame" x="24" y="394.33333333333331" width="345" height="1"/>
+                                <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="result-safe"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="value-subtotal" firstAttribute="leading" secondItem="title-subtotal" secondAttribute="trailing" constant="12" id="gap0"/>
+                            <constraint firstItem="value-igv" firstAttribute="leading" secondItem="title-igv" secondAttribute="trailing" constant="12" id="gap1"/>
+                            <constraint firstItem="value-base" firstAttribute="leading" secondItem="title-base" secondAttribute="trailing" constant="12" id="gap2"/>
+                            <constraint firstItem="value-intereses" firstAttribute="leading" secondItem="title-intereses" secondAttribute="trailing" constant="12" id="gap3"/>
+                            <constraint firstItem="value-total" firstAttribute="leading" secondItem="title-total" secondAttribute="trailing" constant="12" id="gap4"/>
+                            <constraint firstItem="value-cuota" firstAttribute="leading" secondItem="title-cuota" secondAttribute="trailing" constant="12" id="gap5"/>
+                            <constraint firstItem="title-subtotal" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl0"/>
+                            <constraint firstItem="title-igv" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl1"/>
+                            <constraint firstItem="title-base" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl2"/>
+                            <constraint firstItem="title-intereses" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl3"/>
+                            <constraint firstItem="title-total" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl4"/>
+                            <constraint firstItem="title-cuota" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="rl5"/>
+                            <constraint firstItem="value-subtotal" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr0"/>
+                            <constraint firstItem="value-igv" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr1"/>
+                            <constraint firstItem="value-base" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr2"/>
+                            <constraint firstItem="value-intereses" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr3"/>
+                            <constraint firstItem="value-total" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr4"/>
+                            <constraint firstItem="value-cuota" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="rr5"/>
+                            <constraint firstItem="title-subtotal" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="24" id="rt0"/>
+                            <constraint firstItem="title-igv" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="78" id="rt1"/>
+                            <constraint firstItem="title-base" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="132" id="rt2"/>
+                            <constraint firstItem="title-intereses" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="186" id="rt3"/>
+                            <constraint firstItem="title-total" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="256" id="rt4"/>
+                            <constraint firstItem="title-cuota" firstAttribute="top" secondItem="result-safe" secondAttribute="top" constant="310" id="rt5"/>
+                            <constraint firstItem="title-subtotal" firstAttribute="width" constant="150" id="rw0"/>
+                            <constraint firstItem="title-igv" firstAttribute="width" constant="150" id="rw1"/>
+                            <constraint firstItem="title-base" firstAttribute="width" constant="150" id="rw2"/>
+                            <constraint firstItem="title-intereses" firstAttribute="width" constant="150" id="rw3"/>
+                            <constraint firstItem="title-total" firstAttribute="width" constant="150" id="rw4"/>
+                            <constraint firstItem="title-cuota" firstAttribute="width" constant="150" id="rw5"/>
+                            <constraint firstItem="value-subtotal" firstAttribute="top" secondItem="title-subtotal" secondAttribute="top" id="ry0"/>
+                            <constraint firstItem="value-igv" firstAttribute="top" secondItem="title-igv" secondAttribute="top" id="ry1"/>
+                            <constraint firstItem="value-base" firstAttribute="top" secondItem="title-base" secondAttribute="top" id="ry2"/>
+                            <constraint firstItem="value-intereses" firstAttribute="top" secondItem="title-intereses" secondAttribute="top" id="ry3"/>
+                            <constraint firstItem="value-total" firstAttribute="top" secondItem="title-total" secondAttribute="top" id="ry4"/>
+                            <constraint firstItem="value-cuota" firstAttribute="top" secondItem="title-cuota" secondAttribute="top" id="ry5"/>
+                            <constraint firstItem="separator" firstAttribute="height" constant="1" id="sh"/>
+                            <constraint firstItem="separator" firstAttribute="leading" secondItem="result-safe" secondAttribute="leading" constant="24" id="sl"/>
+                            <constraint firstItem="separator" firstAttribute="trailing" secondItem="result-safe" secondAttribute="trailing" constant="-24" id="sr"/>
+                            <constraint firstItem="separator" firstAttribute="top" secondItem="title-intereses" secondAttribute="bottom" constant="16" id="st"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Resultado" id="result-nav"/>
+                    <connections>
+                        <outlet property="baseLabel" destination="value-base" id="out-base"/>
+                        <outlet property="cuotaLabel" destination="value-cuota" id="out-cuota"/>
+                        <outlet property="igvLabel" destination="value-igv" id="out-igv"/>
+                        <outlet property="interesesLabel" destination="value-intereses" id="out-intereses"/>
+                        <outlet property="subtotalLabel" destination="value-subtotal" id="out-subtotal"/>
+                        <outlet property="totalLabel" destination="value-total" id="out-total"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="result-responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1600" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
