@@ -1,0 +1,33 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+		000000000000000000000001 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate.swift"; sourceTree = "<group>"; };
+		000000000000000000000002 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController.swift"; sourceTree = "<group>"; };
+		000000000000000000000003 = { isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		000000000000000000000004 = { isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		000000000000000000000005 = { isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		000000000000000000000006 = { isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apple_lab05_IMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00000000000000000000000B = { isa = PBXBuildFile; fileRef = 000000000000000000000001; };
+		00000000000000000000000C = { isa = PBXBuildFile; fileRef = 000000000000000000000002; };
+		00000000000000000000000D = { isa = PBXBuildFile; fileRef = 000000000000000000000003; };
+		00000000000000000000000E = { isa = PBXBuildFile; fileRef = 000000000000000000000004; };
+		000000000000000000000014 = { isa = PBXGroup; children = (000000000000000000000015, 000000000000000000000016); sourceTree = "<group>"; };
+		000000000000000000000015 = { isa = PBXGroup; children = (000000000000000000000001, 000000000000000000000002, 000000000000000000000003, 000000000000000000000004, 000000000000000000000005); path = apple_lab05_IMC; sourceTree = "<group>"; };
+		000000000000000000000016 = { isa = PBXGroup; children = (000000000000000000000006); name = Products; sourceTree = "<group>"; };
+		00000000000000000000001E = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (00000000000000000000000B, 00000000000000000000000C); runOnlyForDeploymentPostprocessing = 0; };
+		00000000000000000000001F = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (00000000000000000000000D, 00000000000000000000000E); runOnlyForDeploymentPostprocessing = 0; };
+		000000000000000000000020 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		000000000000000000000028 = { isa = PBXNativeTarget; buildConfigurationList = 000000000000000000000033; buildPhases = (00000000000000000000001E, 000000000000000000000020, 00000000000000000000001F); buildRules = (); dependencies = (); name = apple_lab05_IMC; productName = apple_lab05_IMC; productReference = 000000000000000000000006; productType = "com.apple.product-type.application"; };
+		000000000000000000000029 = { isa = PBXProject; attributes = { LastUpgradeCheck = 2630; ORGANIZATIONNAME = Empresa; TargetAttributes = { 000000000000000000000028 = { CreatedOnToolsVersion = 26.3; }; }; }; buildConfigurationList = 000000000000000000000032; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 000000000000000000000014; productRefGroup = 000000000000000000000016; projectDirPath = ""; projectRoot = ""; targets = (000000000000000000000028); };
+		000000000000000000000032 = { isa = XCConfigurationList; buildConfigurations = (00000000000000000000003C, 00000000000000000000003D); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		000000000000000000000033 = { isa = XCConfigurationList; buildConfigurations = (00000000000000000000003E, 00000000000000000000003F); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		00000000000000000000003C = { isa = XCBuildConfiguration; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 15.0; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)"; }; name = Debug; };
+		00000000000000000000003D = { isa = XCBuildConfiguration; buildSettings = { CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 15.0; SWIFT_COMPILATION_MODE = wholemodule; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; }; name = Release; };
+		00000000000000000000003E = { isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = apple_lab05_IMC/Info.plist; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.empresa.apple-lab05-IMC; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		00000000000000000000003F = { isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = apple_lab05_IMC/Info.plist; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.empresa.apple-lab05-IMC; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+	};
+	rootObject = 000000000000000000000029;
+}
