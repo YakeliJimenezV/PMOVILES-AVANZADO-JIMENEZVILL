@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="loan-controller">
+  <device id="retina6_12" orientation="portrait" appearance="light" />
+  <dependencies>
+    <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504" />
+    <capability name="Safe area layout guides" minToolsVersion="9.0" />
+    <capability name="System colors in document resources" minToolsVersion="11.0" />
+    <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0" />
+  </dependencies>
+  <scenes>
+    <scene sceneID="loan-scene">
+      <objects>
+        <viewController id="loan-controller" customClass="ViewController" customModule="apple_lab05_Prestamos" customModuleProvider="target" sceneMemberID="viewController">
+          <view key="view" contentMode="scaleToFill" id="loan-view">
+            <rect key="frame" x="0" y="0" width="393" height="852" />
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" />
+            <subviews>
+              <label id="title" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Calculadora de Préstamos" numberOfLines="0" textAlignment="center">
+                <rect key="frame" x="24" y="83" width="345" height="27" />
+                <fontDescription key="fontDescription" type="boldSystem" pointSize="22" />
+              </label>
+              <label id="capital-heading" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Capital inicial" numberOfLines="0">
+                <rect key="frame" x="24" y="122" width="345" height="21" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+              </label>
+              <textField id="capital-field" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" borderStyle="roundedRect" placeholder="Ej. 10000">
+                <rect key="frame" x="24" y="155" width="345" height="40" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+                <textInputTraits key="textInputTraits" keyboardType="decimalPad" />
+                <constraints>
+                  <constraint firstAttribute="height" constant="40" id="capital-field-height" />
+                </constraints>
+              </textField>
+              <label id="tasa-heading" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Tasa de interés anual (%)" numberOfLines="0">
+                <rect key="frame" x="24" y="207" width="345" height="21" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+              </label>
+              <textField id="tasa-field" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" borderStyle="roundedRect" placeholder="Ej. 12">
+                <rect key="frame" x="24" y="240" width="345" height="40" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+                <textInputTraits key="textInputTraits" keyboardType="decimalPad" />
+                <constraints>
+                  <constraint firstAttribute="height" constant="40" id="tasa-field-height" />
+                </constraints>
+              </textField>
+              <label id="anios-heading" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Plazo del préstamo (años)" numberOfLines="0">
+                <rect key="frame" x="24" y="292" width="345" height="21" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+              </label>
+              <textField id="anios-field" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" borderStyle="roundedRect" placeholder="Ej. 2">
+                <rect key="frame" x="24" y="325" width="345" height="40" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+                <textInputTraits key="textInputTraits" keyboardType="decimalPad" />
+                <constraints>
+                  <constraint firstAttribute="height" constant="40" id="anios-field-height" />
+                </constraints>
+              </textField>
+              <button id="calculate" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" buttonType="system" opaque="NO">
+                <rect key="frame" x="24" y="377" width="345" height="44" />
+                <state key="normal" title="Calcular" />
+                <connections>
+                  <action selector="calcular:" destination="loan-controller" eventType="touchUpInside" id="calculate-action" />
+                </connections>
+                <constraints>
+                  <constraint firstAttribute="height" constant="44" id="calculate-height" />
+                </constraints>
+              </button>
+              <label id="cuota-result" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Cuota mensual: S/ —" numberOfLines="0">
+                <rect key="frame" x="24" y="433" width="345" height="21" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+              </label>
+              <label id="total-result" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" userInteractionEnabled="NO" text="Monto total a pagar: S/ —" numberOfLines="0">
+                <rect key="frame" x="24" y="466" width="345" height="21" />
+                <fontDescription key="fontDescription" type="system" pointSize="17" />
+              </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="safe-area" />
+            <color key="backgroundColor" systemColor="systemBackgroundColor" />
+            <constraints>
+              <constraint firstItem="title" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="title-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="title" secondAttribute="trailing" constant="24" id="title-trailing" />
+              <constraint firstItem="title" firstAttribute="top" secondItem="safe-area" secondAttribute="top" constant="24" id="title-top" />
+              <constraint firstItem="capital-heading" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="capital-heading-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="capital-heading" secondAttribute="trailing" constant="24" id="capital-heading-trailing" />
+              <constraint firstItem="capital-heading" firstAttribute="top" secondItem="title" secondAttribute="bottom" constant="12" id="capital-heading-top" />
+              <constraint firstItem="capital-field" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="capital-field-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="capital-field" secondAttribute="trailing" constant="24" id="capital-field-trailing" />
+              <constraint firstItem="capital-field" firstAttribute="top" secondItem="capital-heading" secondAttribute="bottom" constant="12" id="capital-field-top" />
+              <constraint firstItem="tasa-heading" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="tasa-heading-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="tasa-heading" secondAttribute="trailing" constant="24" id="tasa-heading-trailing" />
+              <constraint firstItem="tasa-heading" firstAttribute="top" secondItem="capital-field" secondAttribute="bottom" constant="12" id="tasa-heading-top" />
+              <constraint firstItem="tasa-field" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="tasa-field-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="tasa-field" secondAttribute="trailing" constant="24" id="tasa-field-trailing" />
+              <constraint firstItem="tasa-field" firstAttribute="top" secondItem="tasa-heading" secondAttribute="bottom" constant="12" id="tasa-field-top" />
+              <constraint firstItem="anios-heading" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="anios-heading-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="anios-heading" secondAttribute="trailing" constant="24" id="anios-heading-trailing" />
+              <constraint firstItem="anios-heading" firstAttribute="top" secondItem="tasa-field" secondAttribute="bottom" constant="12" id="anios-heading-top" />
+              <constraint firstItem="anios-field" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="anios-field-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="anios-field" secondAttribute="trailing" constant="24" id="anios-field-trailing" />
+              <constraint firstItem="anios-field" firstAttribute="top" secondItem="anios-heading" secondAttribute="bottom" constant="12" id="anios-field-top" />
+              <constraint firstItem="calculate" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="calculate-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="calculate" secondAttribute="trailing" constant="24" id="calculate-trailing" />
+              <constraint firstItem="calculate" firstAttribute="top" secondItem="anios-field" secondAttribute="bottom" constant="12" id="calculate-top" />
+              <constraint firstItem="cuota-result" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="cuota-result-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="cuota-result" secondAttribute="trailing" constant="24" id="cuota-result-trailing" />
+              <constraint firstItem="cuota-result" firstAttribute="top" secondItem="calculate" secondAttribute="bottom" constant="12" id="cuota-result-top" />
+              <constraint firstItem="total-result" firstAttribute="leading" secondItem="safe-area" secondAttribute="leading" constant="24" id="total-result-leading" />
+              <constraint firstItem="safe-area" firstAttribute="trailing" secondItem="total-result" secondAttribute="trailing" constant="24" id="total-result-trailing" />
+              <constraint firstItem="total-result" firstAttribute="top" secondItem="cuota-result" secondAttribute="bottom" constant="12" id="total-result-top" />
+            </constraints>
+          </view>
+          <connections>
+            <outlet property="capitalTextField" destination="capital-field" id="capitalTextField-outlet" />
+            <outlet property="tasaTextField" destination="tasa-field" id="tasaTextField-outlet" />
+            <outlet property="aniosTextField" destination="anios-field" id="aniosTextField-outlet" />
+            <outlet property="cuotaLabel" destination="cuota-result" id="cuotaLabel-outlet" />
+            <outlet property="totalLabel" destination="total-result" id="totalLabel-outlet" />
+          </connections>
+        </viewController>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="loan-responder" sceneMemberID="firstResponder" />
+      </objects>
+    </scene>
+  </scenes>
+  <resources>
+    <systemColor name="systemBackgroundColor">
+      <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" />
+    </systemColor>
+  </resources>
+</document>
