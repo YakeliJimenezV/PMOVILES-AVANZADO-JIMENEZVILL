@@ -17,6 +17,7 @@ final class DetalleCulturaViewController: UIViewController {
             preconditionFailure("El detalle requiere una cultura seleccionada")
         }
         title = "Nuestro patrimonio"
+        navigationItem.backButtonTitle = cultura.nombre
         nombreLabel.text = cultura.nombre
         regionLabel.text = cultura.region
         descripcionLabel.text = cultura.descripcion
@@ -34,19 +35,22 @@ final class DetalleCulturaViewController: UIViewController {
         configurarTemas(cultura.temas)
     }
 
-    private func configurarTemas(_ temas: [String]) {
-        for tema in temas {
+    private func configurarTemas(_ temas: [TemaCultural]) {
+        for (indice, tema) in temas.enumerated() {
             // Tarjetas con respuesta visual al toque
             let tarjeta = TarjetaTemaButton(type: .custom)
             tarjeta.backgroundColor = .white
             tarjeta.layer.cornerRadius = 16
             tarjeta.layer.borderWidth = 0.5
             tarjeta.layer.borderColor = UIColor(named: "Dorado")?.withAlphaComponent(0.45).cgColor
-            tarjeta.accessibilityLabel = tema
+            tarjeta.accessibilityLabel = tema.titulo
+            tarjeta.tag = indice
+            tarjeta.isEnabled = tema.detalle != nil
+            tarjeta.addTarget(self, action: #selector(seleccionarTema(_:)), for: .touchUpInside)
             tarjeta.accessibilityIdentifier = "tema-\(temasStackView.arrangedSubviews.count)"
 
             let titulo = UILabel()
-            titulo.text = tema
+            titulo.text = tema.titulo
             titulo.textColor = UIColor(named: "Granate")
             titulo.font = UIFontMetrics(forTextStyle: .headline).scaledFont(
                 for: .systemFont(ofSize: 17, weight: .semibold))
@@ -56,6 +60,7 @@ final class DetalleCulturaViewController: UIViewController {
             let flecha = UIImageView(image: UIImage(systemName: "chevron.right"))
             flecha.tintColor = UIColor(named: "Granate")
             flecha.contentMode = .scaleAspectFit
+            flecha.isHidden = tema.detalle == nil
             let contenido = UIStackView(arrangedSubviews: [titulo, flecha])
             contenido.axis = .horizontal
             contenido.alignment = .center
@@ -77,6 +82,22 @@ final class DetalleCulturaViewController: UIViewController {
             ])
             temasStackView.addArrangedSubview(tarjeta)
         }
+    }
+
+    @objc private func seleccionarTema(_ sender: UIButton) {
+        guard let cultura, cultura.temas.indices.contains(sender.tag) else { return }
+        let tema = cultura.temas[sender.tag]
+        guard tema.detalle != nil else { return }
+        performSegue(withIdentifier: "mostrarDetalleTema", sender: tema)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "mostrarDetalleTema",
+              let destino = segue.destination as? DetalleTemaViewController,
+              let tema = sender as? TemaCultural, tema.detalle != nil,
+              let cultura else { return }
+        destino.nombreCultura = cultura.nombre
+        destino.tema = tema
     }
 
     override func viewDidLayoutSubviews() {
