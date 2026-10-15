@@ -1,261 +1,285 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="27000" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nav-vc">
-    <device id="retina6_12" orientation="portrait" appearance="light" />
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25098" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nav-vc">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="27000" />
-        <capability name="Safe area layout guides" minToolsVersion="9.0" />
-        <capability name="Named colors" minToolsVersion="9.0" />
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0" />
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25073"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
         <scene sceneID="nav-vc-scene">
             <objects>
                 <navigationController id="nav-vc" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" id="nav-bar" contentMode="scaleToFill">
-                        <rect key="frame" x="0" y="0" width="393" height="44" />
-                        <autoresizingMask key="autoresizingMask" />
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="list-vc" kind="relationship" relationship="rootViewController" id="nav-root" />
+                        <segue destination="list-vc" kind="relationship" relationship="rootViewController" id="nav-root"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nav-vc-first" sceneMemberID="firstResponder" />
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nav-vc-first" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0" y="0" />
+            <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
+        <!--View Controller-->
         <scene sceneID="list-vc-scene">
             <objects>
-                <viewController id="list-vc" sceneMemberID="viewController" customClass="ViewController" customModule="CulturasPeruanas" customModuleProvider="target">
-                    <view key="view" id="list-view" contentMode="scaleToFill">
-                        <rect key="frame" x="0" y="0" width="393" height="852" />
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" />
+                <viewController id="list-vc" customClass="ViewController" customModule="CulturasPeruanas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="list-view">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView id="header" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0" y="0" width="345" height="150" />
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="header">
+                                <rect key="frame" x="24" y="184" width="345" height="107"/>
                                 <subviews>
-                                    <label id="eyebrow" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATRIMONIO VIVO" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0" y="0" width="250" height="30" />
-                                        <fontDescription key="fontDescription" type="system" weight="bold" pointSize="11" />
-                                        <color key="textColor" name="Verde" />
-                                        <nil key="highlightedColor" />
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATRIMONIO VIVO" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="eyebrow">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="13.333333333333334"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                        <color key="textColor" name="Verde"/>
+                                        <nil key="highlightedColor"/>
                                     </label>
-                                    <label id="heading" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturas del Perú" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0" y="0" width="250" height="30" />
-                                        <fontDescription key="fontDescription" type="system" weight="bold" pointSize="32" />
-                                        <color key="textColor" name="Granate" />
-                                        <nil key="highlightedColor" />
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Culturas del Perú" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="heading">
+                                        <rect key="frame" x="0.0" y="21.333333333333346" width="345" height="38.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <color key="textColor" name="Granate"/>
+                                        <nil key="highlightedColor"/>
                                     </label>
-                                    <label id="subtitle" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descubre nuestra historia y patrimonio" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0" y="0" width="250" height="30" />
-                                        <fontDescription key="fontDescription" type="system" weight="regular" pointSize="16" />
-                                        <color key="textColor" name="Verde" />
-                                        <nil key="highlightedColor" />
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descubre nuestra historia y patrimonio" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="subtitle">
+                                        <rect key="frame" x="0.0" y="67.666666666666657" width="345" height="19.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" name="Verde"/>
+                                        <nil key="highlightedColor"/>
                                     </label>
-                                    <label id="count" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 CULTURAS · UN LEGADO EXTRAORDINARIO" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0" y="0" width="250" height="30" />
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10" />
-                                        <color key="textColor" name="Granate" />
-                                        <nil key="highlightedColor" />
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6 CULTURAS · UN LEGADO EXTRAORDINARIO" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="count">
+                                        <rect key="frame" x="0.0" y="95" width="345" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" name="Granate"/>
+                                        <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <tableView dataMode="prototypes" id="cultures-table" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="164" estimatedRowHeight="164" sectionHeaderHeight="0" sectionFooterHeight="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0" y="0" width="393" height="550" />
-                                <color key="backgroundColor" name="Crema" />
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="164" estimatedRowHeight="164" sectionHeaderHeight="0.0" sectionFooterHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="cultures-table">
+                                <rect key="frame" x="0.0" y="309" width="393" height="475"/>
+                                <color key="backgroundColor" name="Crema"/>
                                 <prototypes>
-                                    <tableViewCell id="culture-cell" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CulturaCell" rowHeight="164" customClass="CulturaTableViewCell" customModule="CulturasPeruanas" customModuleProvider="target">
-                                        <rect key="frame" x="0" y="0" width="393" height="164" />
-                                        <autoresizingMask key="autoresizingMask" />
-                                        <tableViewCellContentView key="contentView" id="cell-content" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="culture-cell">
-                                            <rect key="frame" x="0" y="0" width="393" height="164" />
-                                            <autoresizingMask key="autoresizingMask" />
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CulturaCell" rowHeight="164" id="culture-cell" customClass="CulturaTableViewCell" customModule="CulturasPeruanas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="164"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="culture-cell" id="cell-content">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="164"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view id="card" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO">
-                                                    <rect key="frame" x="0" y="0" width="353" height="148" />
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card">
+                                                    <rect key="frame" x="20" y="8" width="353" height="148"/>
                                                     <subviews>
-                                                        <imageView id="cell-image" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO">
-                                                            <rect key="frame" x="0" y="0" width="112" height="124" />
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="cell-image">
+                                                            <rect key="frame" x="12" y="12" width="112" height="124"/>
                                                         </imageView>
-                                                        <stackView id="cell-text" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO">
-                                                            <rect key="frame" x="0" y="0" width="345" height="150" />
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cell-text">
+                                                            <rect key="frame" x="138" y="39" width="201" height="70"/>
                                                             <subviews>
-                                                                <label id="cell-name" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cultura Inca" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                                    <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="20" />
-                                                                    <color key="textColor" name="Granate" />
-                                                                    <nil key="highlightedColor" />
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cultura Inca" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cell-name">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="201" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                    <color key="textColor" name="Granate"/>
+                                                                    <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label id="cell-region" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cusco · Andes del Perú" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                                    <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                                    <fontDescription key="fontDescription" type="system" weight="regular" pointSize="13" />
-                                                                    <color key="textColor" name="Verde" />
-                                                                    <nil key="highlightedColor" />
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cusco · Andes del Perú" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cell-region">
+                                                                    <rect key="frame" x="0.0" y="32" width="201" height="15.666666666666664"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <color key="textColor" name="Verde"/>
+                                                                    <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label id="cell-explore" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explorar cultura  →" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                                    <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12" />
-                                                                    <color key="textColor" name="Granate" />
-                                                                    <nil key="highlightedColor" />
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explorar cultura  →" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cell-explore">
+                                                                    <rect key="frame" x="0.0" y="55.666666666666671" width="201" height="14.333333333333329"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                    <color key="textColor" name="Granate"/>
+                                                                    <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" />
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="cell-image" firstAttribute="leading" id="constraint-1" secondItem="card" secondAttribute="leading" constant="12" />
-                                                        <constraint firstItem="cell-image" firstAttribute="top" id="constraint-2" secondItem="card" secondAttribute="top" constant="12" relation="greaterThanOrEqual" />
-                                                        <constraint firstItem="cell-image" firstAttribute="bottom" id="constraint-3" secondItem="card" secondAttribute="bottom" constant="-12" relation="lessThanOrEqual" />
-                                                        <constraint firstItem="cell-image" firstAttribute="width" id="constraint-4" constant="112" />
-                                                        <constraint firstItem="cell-image" firstAttribute="height" id="constraint-5" constant="124" />
-                                                        <constraint firstItem="cell-text" firstAttribute="leading" id="constraint-6" secondItem="cell-image" secondAttribute="trailing" constant="14" />
-                                                        <constraint firstItem="cell-text" firstAttribute="trailing" id="constraint-7" secondItem="card" secondAttribute="trailing" constant="-14" />
-                                                        <constraint firstItem="cell-text" firstAttribute="centerY" id="constraint-8" secondItem="card" secondAttribute="centerY" />
-                                                        <constraint firstItem="cell-text" firstAttribute="top" id="constraint-9" secondItem="card" secondAttribute="top" constant="16" relation="greaterThanOrEqual" />
-                                                        <constraint firstItem="cell-text" firstAttribute="bottom" id="constraint-10" secondItem="card" secondAttribute="bottom" constant="-16" relation="lessThanOrEqual" />
-                                                        <constraint firstItem="cell-image" firstAttribute="centerY" secondItem="card" secondAttribute="centerY" id="image-center-y" />
+                                                        <constraint firstItem="cell-image" firstAttribute="leading" secondItem="card" secondAttribute="leading" constant="12" id="constraint-1"/>
+                                                        <constraint firstItem="cell-text" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="card" secondAttribute="bottom" constant="-16" id="constraint-10"/>
+                                                        <constraint firstItem="cell-image" firstAttribute="top" relation="greaterThanOrEqual" secondItem="card" secondAttribute="top" constant="12" id="constraint-2"/>
+                                                        <constraint firstItem="cell-image" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="card" secondAttribute="bottom" constant="-12" id="constraint-3"/>
+                                                        <constraint firstItem="cell-image" firstAttribute="width" constant="112" id="constraint-4"/>
+                                                        <constraint firstItem="cell-image" firstAttribute="height" constant="124" id="constraint-5"/>
+                                                        <constraint firstItem="cell-text" firstAttribute="leading" secondItem="cell-image" secondAttribute="trailing" constant="14" id="constraint-6"/>
+                                                        <constraint firstItem="cell-text" firstAttribute="trailing" secondItem="card" secondAttribute="trailing" constant="-14" id="constraint-7"/>
+                                                        <constraint firstItem="cell-text" firstAttribute="centerY" secondItem="card" secondAttribute="centerY" id="constraint-8"/>
+                                                        <constraint firstItem="cell-text" firstAttribute="top" relation="greaterThanOrEqual" secondItem="card" secondAttribute="top" constant="16" id="constraint-9"/>
+                                                        <constraint firstItem="cell-image" firstAttribute="centerY" secondItem="card" secondAttribute="centerY" id="image-center-y"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="card" firstAttribute="leading" id="constraint-11" secondItem="cell-content" secondAttribute="leading" constant="20" />
-                                                <constraint firstItem="card" firstAttribute="trailing" id="constraint-12" secondItem="cell-content" secondAttribute="trailing" constant="-20" />
-                                                <constraint firstItem="card" firstAttribute="top" id="constraint-13" secondItem="cell-content" secondAttribute="top" constant="8" />
-                                                <constraint firstItem="card" firstAttribute="bottom" id="constraint-14" secondItem="cell-content" secondAttribute="bottom" constant="-8" />
+                                                <constraint firstItem="card" firstAttribute="leading" secondItem="cell-content" secondAttribute="leading" constant="20" id="constraint-11"/>
+                                                <constraint firstItem="card" firstAttribute="trailing" secondItem="cell-content" secondAttribute="trailing" constant="-20" id="constraint-12"/>
+                                                <constraint firstItem="card" firstAttribute="top" secondItem="cell-content" secondAttribute="top" constant="8" id="constraint-13"/>
+                                                <constraint firstItem="card" firstAttribute="bottom" secondItem="cell-content" secondAttribute="bottom" constant="-8" id="constraint-14"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="tarjetaView" destination="card" id="outlet-card-tarjetaView" />
-                                            <outlet property="culturaImageView" destination="cell-image" id="outlet-cell-image-culturaImageView" />
-                                            <outlet property="nombreLabel" destination="cell-name" id="outlet-cell-name-nombreLabel" />
-                                            <outlet property="regionLabel" destination="cell-region" id="outlet-cell-region-regionLabel" />
-                                            <outlet property="explorarLabel" destination="cell-explore" id="outlet-cell-explore-explorarLabel" />
+                                            <outlet property="culturaImageView" destination="cell-image" id="outlet-cell-image-culturaImageView"/>
+                                            <outlet property="explorarLabel" destination="cell-explore" id="outlet-cell-explore-explorarLabel"/>
+                                            <outlet property="nombreLabel" destination="cell-name" id="outlet-cell-name-nombreLabel"/>
+                                            <outlet property="regionLabel" destination="cell-region" id="outlet-cell-region-regionLabel"/>
+                                            <outlet property="tarjetaView" destination="card" id="outlet-card-tarjetaView"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="list-vc" id="outlet-list-vc-dataSource" />
-                                    <outlet property="delegate" destination="list-vc" id="outlet-list-vc-delegate" />
+                                    <outlet property="dataSource" destination="list-vc" id="outlet-list-vc-dataSource"/>
+                                    <outlet property="delegate" destination="list-vc" id="outlet-list-vc-delegate"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="list-view-safe" />
-                        <color key="backgroundColor" name="Crema" />
+                        <viewLayoutGuide key="safeArea" id="list-view-safe"/>
+                        <color key="backgroundColor" name="Crema"/>
                         <constraints>
-                            <constraint firstItem="header" firstAttribute="leading" id="constraint-15" secondItem="list-view-safe" secondAttribute="leading" constant="24" />
-                            <constraint firstItem="header" firstAttribute="trailing" id="constraint-16" secondItem="list-view-safe" secondAttribute="trailing" constant="-24" />
-                            <constraint firstItem="header" firstAttribute="top" id="constraint-17" secondItem="list-view-safe" secondAttribute="top" constant="12" />
-                            <constraint firstItem="cultures-table" firstAttribute="top" id="constraint-18" secondItem="header" secondAttribute="bottom" constant="18" />
-                            <constraint firstItem="cultures-table" firstAttribute="leading" id="constraint-19" secondItem="list-view-safe" secondAttribute="leading" />
-                            <constraint firstItem="cultures-table" firstAttribute="trailing" id="constraint-20" secondItem="list-view-safe" secondAttribute="trailing" />
-                            <constraint firstItem="cultures-table" firstAttribute="bottom" id="constraint-21" secondItem="list-view-safe" secondAttribute="bottom" />
+                            <constraint firstItem="header" firstAttribute="leading" secondItem="list-view-safe" secondAttribute="leading" constant="24" id="constraint-15"/>
+                            <constraint firstItem="header" firstAttribute="trailing" secondItem="list-view-safe" secondAttribute="trailing" constant="-24" id="constraint-16"/>
+                            <constraint firstItem="header" firstAttribute="top" secondItem="list-view-safe" secondAttribute="top" constant="12" id="constraint-17"/>
+                            <constraint firstItem="cultures-table" firstAttribute="top" secondItem="header" secondAttribute="bottom" constant="18" id="constraint-18"/>
+                            <constraint firstItem="cultures-table" firstAttribute="leading" secondItem="list-view-safe" secondAttribute="leading" id="constraint-19"/>
+                            <constraint firstItem="cultures-table" firstAttribute="trailing" secondItem="list-view-safe" secondAttribute="trailing" id="constraint-20"/>
+                            <constraint firstItem="cultures-table" firstAttribute="bottom" secondItem="list-view-safe" secondAttribute="bottom" id="constraint-21"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="list-nav" />
+                    <navigationItem key="navigationItem" id="list-nav"/>
                     <connections>
-                        <outlet property="tableView" destination="cultures-table" id="outlet-cultures-table-tableView" />
-                        <segue destination="detail-vc" kind="show" identifier="mostrarDetalle" id="show-detail" />
+                        <outlet property="tableView" destination="cultures-table" id="outlet-cultures-table-tableView"/>
+                        <segue destination="detail-vc" kind="show" identifier="mostrarDetalle" id="show-detail"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="list-vc-first" sceneMemberID="firstResponder" />
+                <placeholder placeholderIdentifier="IBFirstResponder" id="list-vc-first" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="0" />
+            <point key="canvasLocation" x="900" y="0.0"/>
         </scene>
+        <!--Nuestro patrimonio-->
         <scene sceneID="detail-vc-scene">
             <objects>
-                <viewController id="detail-vc" sceneMemberID="viewController" customClass="DetalleCulturaViewController" customModule="CulturasPeruanas" customModuleProvider="target">
-                    <view key="view" id="detail-view" contentMode="scaleToFill">
-                        <rect key="frame" x="0" y="0" width="393" height="852" />
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" />
+                <viewController id="detail-vc" customClass="DetalleCulturaViewController" customModule="CulturasPeruanas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="detail-view">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView id="detail-scroll" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="0" y="0" width="393" height="718" />
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="detail-scroll">
+                                <rect key="frame" x="0.0" y="172" width="393" height="612"/>
                                 <subviews>
-                                    <stackView id="detail-stack" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO">
-                                        <rect key="frame" x="0" y="0" width="345" height="150" />
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="detail-stack">
+                                        <rect key="frame" x="24" y="20" width="345" height="752.33333333333337"/>
                                         <subviews>
-                                            <imageView id="detail-image" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="0" y="0" width="112" height="124" />
-                                                <color key="backgroundColor" name="Crema" />
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="detail-image">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="260"/>
+                                                <color key="backgroundColor" name="Crema"/>
                                                 <constraints>
-                                                    <constraint firstItem="detail-image" firstAttribute="height" constant="260" id="detail-image-height" />
+                                                    <constraint firstAttribute="height" constant="260" id="detail-image-height"/>
                                                 </constraints>
                                             </imageView>
-                                            <label id="detail-name" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cultura Inca" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                <fontDescription key="fontDescription" type="system" weight="bold" pointSize="32" />
-                                                <color key="textColor" name="Granate" />
-                                                <nil key="highlightedColor" />
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cultura Inca" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="detail-name">
+                                                <rect key="frame" x="0.0" y="276" width="345" height="38.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                                <color key="textColor" name="Granate"/>
+                                                <nil key="highlightedColor"/>
                                             </label>
-                                            <label id="detail-region" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cusco · Andes del Perú" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16" />
-                                                <color key="textColor" name="Verde" />
-                                                <nil key="highlightedColor" />
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cusco · Andes del Perú" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="detail-region">
+                                                <rect key="frame" x="0.0" y="330.33333333333337" width="345" height="19.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <color key="textColor" name="Verde"/>
+                                                <nil key="highlightedColor"/>
                                             </label>
-                                            <label id="history-heading" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Historia y legado" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                <fontDescription key="fontDescription" type="system" weight="bold" pointSize="23" />
-                                                <color key="textColor" name="Granate" />
-                                                <nil key="highlightedColor" />
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción histórica de la cultura seleccionada." lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="detail-description">
+                                                <rect key="frame" x="0.0" y="365.66666666666663" width="345" height="43"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" name="Tinta"/>
+                                                <nil key="highlightedColor"/>
                                             </label>
-                                            <label id="detail-description" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción histórica de la cultura seleccionada." numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO">
-                                                <rect key="frame" x="0" y="0" width="250" height="30" />
-                                                <fontDescription key="fontDescription" type="system" weight="regular" pointSize="18" />
-                                                <color key="textColor" name="Tinta" />
-                                                <nil key="highlightedColor" />
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explora su historia" lineBreakMode="tailTruncation" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="history-heading">
+                                                <rect key="frame" x="0.0" y="424.66666666666663" width="345" height="27.666666666666686"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                                <color key="textColor" name="Granate"/>
+                                                <nil key="highlightedColor"/>
                                             </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="detail-topics">
+                                                <rect key="frame" x="0.0" y="468.33333333333337" width="345" height="284"/>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <viewLayoutGuide key="contentLayoutGuide" id="scroll-content" />
-                                <viewLayoutGuide key="frameLayoutGuide" id="scroll-frame" />
                                 <constraints>
-                                    <constraint firstItem="detail-stack" firstAttribute="leading" id="constraint-23" secondItem="scroll-content" secondAttribute="leading" constant="24" />
-                                    <constraint firstItem="detail-stack" firstAttribute="trailing" id="constraint-24" secondItem="scroll-content" secondAttribute="trailing" constant="-24" />
-                                    <constraint firstItem="detail-stack" firstAttribute="top" id="constraint-25" secondItem="scroll-content" secondAttribute="top" constant="20" />
-                                    <constraint firstItem="detail-stack" firstAttribute="bottom" id="constraint-26" secondItem="scroll-content" secondAttribute="bottom" constant="-32" />
-                                    <constraint firstItem="detail-stack" firstAttribute="width" id="constraint-27" secondItem="scroll-frame" secondAttribute="width" constant="-48" />
+                                    <constraint firstItem="detail-stack" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="24" id="constraint-23"/>
+                                    <constraint firstItem="detail-stack" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-24" id="constraint-24"/>
+                                    <constraint firstItem="detail-stack" firstAttribute="top" secondItem="scroll-content" secondAttribute="top" constant="20" id="constraint-25"/>
+                                    <constraint firstItem="detail-stack" firstAttribute="bottom" secondItem="scroll-content" secondAttribute="bottom" constant="-32" id="constraint-26"/>
+                                    <constraint firstItem="detail-stack" firstAttribute="width" secondItem="scroll-frame" secondAttribute="width" constant="-48" id="constraint-27"/>
                                 </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="scroll-content"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="scroll-frame"/>
                             </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="detail-view-safe" />
-                        <color key="backgroundColor" name="Crema" />
+                        <viewLayoutGuide key="safeArea" id="detail-view-safe"/>
+                        <color key="backgroundColor" name="Crema"/>
                         <constraints>
-                            <constraint firstItem="detail-scroll" firstAttribute="leading" id="constraint-28" secondItem="detail-view-safe" secondAttribute="leading" />
-                            <constraint firstItem="detail-scroll" firstAttribute="trailing" id="constraint-29" secondItem="detail-view-safe" secondAttribute="trailing" />
-                            <constraint firstItem="detail-scroll" firstAttribute="top" id="constraint-30" secondItem="detail-view-safe" secondAttribute="top" />
-                            <constraint firstItem="detail-scroll" firstAttribute="bottom" id="constraint-31" secondItem="detail-view-safe" secondAttribute="bottom" />
+                            <constraint firstItem="detail-scroll" firstAttribute="leading" secondItem="detail-view-safe" secondAttribute="leading" id="constraint-28"/>
+                            <constraint firstItem="detail-scroll" firstAttribute="trailing" secondItem="detail-view-safe" secondAttribute="trailing" id="constraint-29"/>
+                            <constraint firstItem="detail-scroll" firstAttribute="top" secondItem="detail-view-safe" secondAttribute="top" id="constraint-30"/>
+                            <constraint firstItem="detail-scroll" firstAttribute="bottom" secondItem="detail-view-safe" secondAttribute="bottom" id="constraint-31"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="detail-nav" title="Nuestro patrimonio" />
+                    <navigationItem key="navigationItem" title="Nuestro patrimonio" id="detail-nav"/>
                     <connections>
-                        <outlet property="culturaImageView" destination="detail-image" id="outlet-detail-image-culturaImageView" />
-                        <outlet property="nombreLabel" destination="detail-name" id="outlet-detail-name-nombreLabel" />
-                        <outlet property="regionLabel" destination="detail-region" id="outlet-detail-region-regionLabel" />
-                        <outlet property="descripcionLabel" destination="detail-description" id="outlet-detail-description-descripcionLabel" />
-                        <outlet property="imagenAlturaConstraint" destination="detail-image-height" id="outlet-detail-image-height" />
+                        <outlet property="culturaImageView" destination="detail-image" id="outlet-detail-image-culturaImageView"/>
+                        <outlet property="descripcionLabel" destination="detail-description" id="outlet-detail-description-descripcionLabel"/>
+                        <outlet property="historiaLabel" destination="history-heading" id="outlet-history-heading"/>
+                        <outlet property="imagenAlturaConstraint" destination="detail-image-height" id="outlet-detail-image-height"/>
+                        <outlet property="nombreLabel" destination="detail-name" id="outlet-detail-name-nombreLabel"/>
+                        <outlet property="regionLabel" destination="detail-region" id="outlet-detail-region-regionLabel"/>
+                        <outlet property="temasStackView" destination="detail-topics" id="outlet-detail-topics"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="detail-vc-first" sceneMemberID="firstResponder" />
+                <placeholder placeholderIdentifier="IBFirstResponder" id="detail-vc-first" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="0" />
+            <point key="canvasLocation" x="1800" y="0.0"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="J9c-tC-NGI">
+            <objects>
+                <viewController id="5rZ-5U-8J2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U9c-6q-G00">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="UEx-yh-ncg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qWk-jl-p7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2630" y="0.0"/>
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Granate">
-            <color red="0.4549019607843137" green="0.17647058823529413" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB" />
-        </namedColor>
-        <namedColor name="Dorado">
-            <color red="0.7764705882352941" green="0.6078431372549019" blue="0.3764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB" />
-        </namedColor>
         <namedColor name="Crema">
-            <color red="0.9686274509803922" green="0.9490196078431372" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB" />
+            <color red="0.96862697601318359" green="0.94902002811431885" blue="0.91372501850128174" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Verde">
-            <color red="0.14901960784313725" green="0.24313725490196078" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB" />
+        <namedColor name="Granate">
+            <color red="0.45490199327468872" green="0.17647099494934082" blue="0.20784300565719604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Tinta">
-            <color red="0.1411764705882353" green="0.1411764705882353" blue="0.1411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB" />
+            <color red="0.1411760002374649" green="0.1411760002374649" blue="0.1411760002374649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Verde">
+            <color red="0.1490200012922287" green="0.24313700199127197" blue="0.21176500618457794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
