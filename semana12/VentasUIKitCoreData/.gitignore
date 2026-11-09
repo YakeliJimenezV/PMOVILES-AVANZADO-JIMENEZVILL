@@ -1,0 +1,16 @@
+.DS_Store
+**/xcuserdata/
+DerivedData/
+/Tests/Productos-A3.md
+/Tests/Clientes-Ventas-A4-A6.md
+**/*.xcuserstate
+.build/
+build/
+*.xcresult/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Archivos locales fuera de la entrega base manual
+/Tests/
+/PROMPTS.md
