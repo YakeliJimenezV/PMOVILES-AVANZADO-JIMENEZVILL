@@ -3,12 +3,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
-    func showAuthenticatedContent() {
-        guard SessionManager.shared.currentUser != nil else { return }
-        window?.rootViewController = RoleTabBarController()
-        window?.makeKeyAndVisible()
-    }
-
     /// Replace the entire protected hierarchy, including old navigation stacks.
     /// Core Data is deliberately untouched: logout only ends the in-memory session.
     func logout() {

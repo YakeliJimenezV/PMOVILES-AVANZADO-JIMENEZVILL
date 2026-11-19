@@ -5,6 +5,15 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "VentasUIKitCoreData")
+        #if DEBUG
+        // Each UI test uses a separate SQLite store, including across app relaunches.
+        if let value = ProcessInfo.processInfo.environment["VENTAS_UI_TEST_STORE"],
+           let runID = UUID(uuidString: value) {
+            let url = FileManager.default.temporaryDirectory
+                .appendingPathComponent("ventas-ui-\(runID.uuidString).sqlite")
+            container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: url)]
+        }
+        #endif
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 NSLog("No se pudo cargar Core Data: %@", error.description)

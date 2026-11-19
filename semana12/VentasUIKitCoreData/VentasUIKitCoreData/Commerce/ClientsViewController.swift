@@ -1,48 +1,47 @@
 import UIKit
 
-final class ClientsViewController: CommerceViewController, UITableViewDataSource, UITableViewDelegate {
-    private let table = UITableView()
-    private var search: UITextField!
+final class ClientsViewController: CommerceViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    @IBOutlet private weak var table: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     private var clients: [ClientItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Clientes"
-        addButton(action: #selector(add), id: "clients.add")
-        search = searchField("Buscar por nombre o documento", id: "clients.search", action: #selector(reload))
-        content.addArrangedSubview(search)
-        configureTable(table)
-        table.dataSource = self
-        table.delegate = self
-        table.accessibilityIdentifier = "clients.list"
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "clients.add"
+        searchBar.searchTextField.accessibilityIdentifier = "clients.search"
+        table.rowHeight = UITableView.automaticDimension
         table.refreshControl = UIRefreshControl()
         table.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
-        content.addArrangedSubview(table)
-        let note = CommerceUI.label("Categoría y comprado se calculan con las ventas no anuladas; no se guardan.", size: 12, color: .secondaryLabel)
-        note.textAlignment = .center
-        table.tableFooterView = note
-        note.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: 55)
     }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) { reload() }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) { searchBar.resignFirstResponder() }
     override func viewWillAppear(_ animated: Bool) { super.viewWillAppear(animated); reload() }
     @objc private func reload() {
         defer { table.refreshControl?.endRefreshing() }
         do {
-            clients = try service.clients(search: search.text ?? "")
+            clients = try service.clients(search: searchBar.text ?? "")
             CommerceUI.empty(table, text: clients.isEmpty ? "No hay clientes para mostrar." : nil)
         } catch { clients = []; CommerceUI.empty(table, text: error.localizedDescription) }
         table.reloadData()
     }
-    @objc private func add() { edit(nil) }
+    @IBAction private func add(_ sender: UIBarButtonItem) { edit(nil) }
+
     private func edit(_ client: ClientItem?) {
         view.endEditing(true)
-        let editor = ClientEditorViewController(service: service, client: client) { [weak self] in self?.reload() }
-        let navigation = UINavigationController(rootViewController: editor)
+        performSegue(withIdentifier: "editClient", sender: client)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "editClient",
+              let navigation = segue.destination as? UINavigationController,
+              let editor = navigation.topViewController as? ClientEditorViewController else { return }
         navigation.isModalInPresentation = true
-        present(navigation, animated: true)
+        editor.configure(client: sender as? ClientItem) { [weak self] in self?.reload() }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { clients.count }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommerceRow", for: indexPath) as! CommerceRowCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ClientCell", for: indexPath) as! ClientCell
         cell.configure(client: clients[indexPath.row])
         return cell
     }
@@ -70,59 +69,55 @@ final class ClientsViewController: CommerceViewController, UITableViewDataSource
     }
 }
 
-private final class ClientEditorViewController: UIViewController, UITextFieldDelegate {
-    private let service: CommerceService
-    private let client: ClientItem?
-    private let onSave: () -> Void
-    private let nameField = UITextField()
-    private let documentField = UITextField()
-    private let errorLabel = CommerceUI.label(size: 13, color: .systemRed)
-    init(service: CommerceService, client: ClientItem?, onSave: @escaping () -> Void) {
-        self.service = service; self.client = client; self.onSave = onSave
-        super.init(nibName: nil, bundle: nil)
+final class ClientCell: UITableViewCell {
+    @IBOutlet private weak var initials: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var documentLabel: UILabel!
+    @IBOutlet private weak var purchasedLabel: UILabel!
+    @IBOutlet private weak var tierLabel: UILabel!
+    @IBOutlet private weak var tierWidth: NSLayoutConstraint!
+
+    func configure(client: ClientItem) {
+        nameLabel.text = client.name
+        documentLabel.text = client.document
+        let purchased = Money.text(client.purchased)
+        purchasedLabel.text = purchased
+        tierLabel.text = client.tier.rawValue
+        tierWidth.constant = ceil(tierLabel.intrinsicContentSize.width) + 14
+        let color = CommerceUI.tierColor(client.tier)
+        tierLabel.backgroundColor = color
+        initials.backgroundColor = color
+        initials.text = String(client.name.split(separator: " ").prefix(2).compactMap(\.first)).uppercased()
+        isAccessibilityElement = true
+        accessibilityLabel = "\(client.name), \(client.document), comprado \(purchased), \(client.tier.rawValue)"
+        accessibilityHint = "Toca para editar"
     }
-    required init?(coder: NSCoder) { fatalError("Use init(service:client:onSave:)") }
+}
+
+final class ClientEditorViewController: CommerceViewController, UITextFieldDelegate {
+    private var client: ClientItem?
+    private var onSave: (() -> Void)?
+    @IBOutlet private weak var nameField: UITextField!
+    @IBOutlet private weak var documentField: UITextField!
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var formScroll: UIScrollView!
+
+    func configure(client: ClientItem?, onSave: @escaping () -> Void) {
+        self.client = client
+        self.onSave = onSave
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .light
         title = client == nil ? "Agregar cliente" : "Editar cliente"
-        view.backgroundColor = AuthFormViewController.background
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancelar", style: .plain, target: self, action: #selector(cancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Guardar", style: .done, target: self, action: #selector(save))
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "client.save"
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scroll)
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 16
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        scroll.addSubview(stack)
-        NSLayoutConstraint.activate([
-            scroll.leadingAnchor.constraint(equalTo: view.leadingAnchor), scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scroll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), scroll.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
-            stack.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor, constant: 24), stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -24),
-            stack.centerXAnchor.constraint(equalTo: scroll.frameLayoutGuide.centerXAnchor), stack.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor, constant: -40)
-        ])
-        for (title, field, id) in [("Nombre", nameField, "client.name"), ("Documento", documentField, "client.document")] {
-            field.placeholder = title
-            field.font = .preferredFont(forTextStyle: .body)
-            field.accessibilityIdentifier = id
-            field.accessibilityLabel = title
-            field.autocorrectionType = .no
-            field.delegate = self
-            stack.addArrangedSubview(CommerceUI.card([CommerceUI.label(title.uppercased(), size: 11, color: .secondaryLabel), field]))
-        }
+        formScroll.bottomAnchor.constraint(lessThanOrEqualTo: view.keyboardLayoutGuide.topAnchor).isActive = true
         nameField.text = client?.name
         documentField.text = client?.document
-        nameField.returnKeyType = .next
-        documentField.returnKeyType = .done
-        errorLabel.isHidden = true
-        errorLabel.accessibilityIdentifier = "client.error"
-        stack.addArrangedSubview(errorLabel)
     }
-    @objc private func cancel() { dismiss(animated: true) }
-    @objc private func save() {
+
+    @IBAction private func cancel(_ sender: UIBarButtonItem) { dismiss(animated: true) }
+    @IBAction private func save() {
         do {
             try service.saveClient(id: client?.id, name: nameField.text ?? "", document: documentField.text ?? "")
             dismiss(animated: true, completion: onSave)
